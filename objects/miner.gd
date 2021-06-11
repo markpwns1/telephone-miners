@@ -1,11 +1,6 @@
 extends Position2D
 
-export var transmitting = []
-
 var receiver: String = ""
-
-func _ready():
-	$anim_plr.play("pylon_idle")
 
 func _process(delta):
 	if receiver != "":
@@ -14,5 +9,4 @@ func _process(delta):
 	pass
 
 func _on_receive(_receiver: String):
-	for obj in transmitting:
-		get_node(obj).receiver = _receiver
+	print(_receiver)
