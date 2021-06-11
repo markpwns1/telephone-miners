@@ -11,7 +11,16 @@ config_version=4
 [application]
 
 config/name="Telephone-miners"
+run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=512
+window/size/height=512
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+window/stretch/shrink=4.0
 
 [physics]
 
