@@ -1,6 +1,6 @@
 extends Position2D
 
-enum State {Idle, Moving, Mining}
+enum State {Idle, Moving, Fighting}
 
 var receiver: String = ""
 var state: int = State.Idle
@@ -16,6 +16,6 @@ func _on_receive(_receiver: String):
 	if command == "move":
 		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		state = State.Moving
-	elif command == "mine":
+	elif command == "fight":
 		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		state = State.Mining
+		state = State.Fighting
