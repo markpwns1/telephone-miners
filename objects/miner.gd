@@ -1,4 +1,4 @@
-extends Position2D
+extends Area2D
 
 enum State {Idle, Moving, Mining}
 
@@ -17,5 +17,4 @@ func _on_receive(_receiver: String):
 		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		state = State.Moving
 	elif command == "mine":
-		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		state = State.Mining
