@@ -51,11 +51,11 @@ func _unhandled_input(event):
 			$grid_selection_icon.visible = true
 			selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
 
-func _process(delta):
+func _draw():
 	for child in get_children():
 		if child.get("transmitting") != null:
 			for transmittee in child.transmitting:
-				draw_line(child.position, child.get_node(transmittee).position, Color.black, 1)
+				draw_line(child.position, child.get_node(transmittee).position, Color(0, 0, 0, 0.5), 1)
 
 func _on_move_pressed():
 	selecting_state = Option.MOVING_TO
@@ -101,3 +101,5 @@ func configure_spawn_ui():
 	$pylon_selection_icon.visible = true
 	$grid_selection_icon.visible = false
 
+func _on_global_timer_beat():
+	update()
