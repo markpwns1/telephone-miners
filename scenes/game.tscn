@@ -144,6 +144,7 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -151,6 +152,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -158,6 +160,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
