@@ -25,4 +25,4 @@ autoplay = true
 stream = ExtResource( 6 )
 autoplay = true
 
-[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx" type="AudioStreamPlayer" parent="."]

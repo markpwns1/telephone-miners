@@ -18,8 +18,7 @@ signal mine
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	target_pos = position
-
-	# connect("mine", get_owner().get_node("sfx_controller"), "_on_mine")
+	connect("mine", get_owner().get_node("sfx_controller"), "_on_mine")
 
 func _process(dt):
 	if receiver != "":
