@@ -14,34 +14,34 @@
 [ext_resource path="res://objects/Star Background.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/lock_position_to_grid.gd" type="Script" id=13]
 [ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
-[ext_resource path="res://assets/movement selection icon.png" type="Texture" id=15]
+[ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 11 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
 } ]
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 15 )
+atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 15 )
+atlas = ExtResource( 14 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
@@ -49,17 +49,17 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -70,7 +70,6 @@ script = ExtResource( 7 )
 fighter_prefab = ExtResource( 5 )
 miner_prefab = ExtResource( 1 )
 pylon_prefab = ExtResource( 3 )
-currency = 10000
 
 [node name="global_timer" parent="." instance=ExtResource( 9 )]
 
@@ -143,21 +142,24 @@ region_rect = Rect2( 32, 32, 32, 16 )
 
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
-frames = SubResource( 3 )
+frames = SubResource( 8 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
 [node name="move_selection_icon" type="AnimatedSprite" parent="."]
 visible = false
 z_index = -1
-frames = SubResource( 6 )
+frames = SubResource( 9 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
 [node name="pylon_selection_icon" type="AnimatedSprite" parent="."]
 visible = false
 z_index = -1
-frames = SubResource( 9 )
+frames = SubResource( 12 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -165,8 +167,10 @@ script = ExtResource( 13 )
 
 [node name="Star Background" parent="." instance=ExtResource( 12 )]
 
-[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
+[node name="enemy" parent="." instance=ExtResource( 15 )]
+position = Vector2( 903.363, 653.899 )
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
+[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]

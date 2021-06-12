@@ -12,6 +12,7 @@ var connected: bool = true # Constant
 
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
+	target_pos = position
 
 func _process(delta):
 	if receiver != "":

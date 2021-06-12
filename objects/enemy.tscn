@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/human enemy.png" type="Texture" id=1]
+[ext_resource path="res://objects/enemy.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=2]
+resource_name = "fighter idle"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("enemt_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 120, 120 )
+
+[node name="enemy" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="enemt_sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 2
+frame = 1
+
+[node name="anim_plr2" type="AnimationPlayer" parent="."]
+autoplay = "fighter idle"
+"anims/fighter idle" = SubResource( 2 )
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="." to="." method="_on_fighter_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_fighter_area_exited"]

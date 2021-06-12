@@ -35,7 +35,6 @@ func _on_receive(_receiver: String):
 		var i = 1
 		var j = 1
 		for obj in transmitting:
-			print(name + ": " + get_node(obj).name)
 			if "pylon" in get_node(obj).name:
 				get_node(obj).receiver = "move " + String(splitted_receiver[1].to_float() + 48 * j) + " " + splitted_receiver[2]
 				j += 1
