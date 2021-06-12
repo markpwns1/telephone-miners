@@ -24,6 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite" type="Sprite" parent="move"]
+z_index = 2
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
@@ -36,6 +37,7 @@ margin_right = 32.0
 margin_bottom = 44.0
 
 [node name="Sprite" type="Sprite" parent="mine"]
+z_index = 2
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
@@ -51,6 +53,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="fight"]
+z_index = 2
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
@@ -63,6 +66,7 @@ margin_right = 32.0
 margin_bottom = 92.0
 
 [node name="Sprite" type="Sprite" parent="defend"]
+z_index = 2
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
