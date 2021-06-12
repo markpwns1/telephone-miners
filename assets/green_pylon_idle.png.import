@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid_selection_icon.png-ad98f31f1749620e171b2077f8c86e78.stex"
+path="res://.import/green_pylon_idle.png-a5624473ad802a7bc0eb586e24a894f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/grid_selection_icon.png"
-dest_files=[ "res://.import/grid_selection_icon.png-ad98f31f1749620e171b2077f8c86e78.stex" ]
+source_file="res://assets/green_pylon_idle.png"
+dest_files=[ "res://.import/green_pylon_idle.png-a5624473ad802a7bc0eb586e24a894f1.stex" ]
 
 [params]
 

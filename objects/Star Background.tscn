@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://shaders/stars.shader" type="Shader" id=1]
+[ext_resource path="res://objects/Star Background.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/space_colour = Plane( 0, 0, 0, 1 )
+shader_param/star_colour = Plane( 1, 1, 1, 1 )
+shader_param/resolution = Vector2( 2048, 2048 )
+shader_param/front_noise_scale = 10.0
+shader_param/mid_noise_scale = 6.0
+shader_param/back_noise_scale = 3.5
+shader_param/front_parallax_mod = 0.5
+shader_param/mid_parallax_mod = 0.2
+shader_param/back_parallax_mod = 0.1
+shader_param/offset = Vector2( 29.958, 0 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+
+void fragment(){
+	COLOR = vec4(0, 0, 0, 1);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 512, 512 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+
+[sub_resource type="NoiseTexture" id=6]
+seamless = true
+noise = SubResource( 5 )
+
+[node name="Star Background" type="MeshInstance2D"]
+material = SubResource( 1 )
+position = Vector2( 653.704, 735.264 )
+z_index = -4096
+mesh = SubResource( 4 )
+texture = SubResource( 6 )
+script = ExtResource( 2 )
+node_to_follow = NodePath("../rts_camera")

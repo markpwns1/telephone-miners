@@ -11,10 +11,10 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 12, 12, 0, 12, 0, 0, 12, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 12, 12, 0, 12, 0, 0, 12, 0 )
 
-[sub_resource type="TileSet" id=5]
+[sub_resource type="TileSet" id=4]
 0/name = "tilesheet.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -61,14 +61,14 @@ points = PoolVector2Array( 12, 12, 0, 12, 0, 0, 12, 0 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 4 )
+2/shape = SubResource( 3 )
 2/shape_one_way = false
 2/shape_one_way_margin = 1.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
@@ -81,7 +81,8 @@ position = Vector2( 300, 300 )
 [node name="nav" type="Navigation2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="nav"]
-tile_set = SubResource( 5 )
+z_index = -5
+tile_set = SubResource( 4 )
 cell_size = Vector2( 12, 12 )
 format = 1
 script = ExtResource( 2 )

@@ -9,6 +9,7 @@ var mouse_on: bool = false
 
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
+	target_pos = position
 
 func _process(dt):
 	if receiver != "":
@@ -23,8 +24,9 @@ func _on_receive(_receiver: String):
 		mstate = State.Moving
 	elif command == "mine":
 		mstate = State.Mining
-	elif command == "check":
+	elif command == "beat":
 		connected = true
+		move_towards_target()
 
 func _on_miner_mouse_entered():
 	mouse_on = true
@@ -34,4 +36,3 @@ func _on_miner_mouse_exited():
 
 func _on_global_timer_beat():
 	move_towards_target()
-	

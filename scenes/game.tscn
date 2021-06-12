@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://objects/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/controller.tscn" type="PackedScene" id=2]
@@ -11,6 +11,59 @@
 [ext_resource path="res://objects/timer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/sfx_controller.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/grid_selection_icon.png" type="Texture" id=11]
+[ext_resource path="res://objects/Star Background.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/lock_position_to_grid.gd" type="Script" id=13]
+[ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
+[ext_resource path="res://assets/movement selection icon.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 12, 12, 12 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 12, 12, 12 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 12, 12, 12 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 7 )
@@ -23,18 +76,18 @@ pylon_prefab = ExtResource( 3 )
 [node name="world" parent="." instance=ExtResource( 8 )]
 
 [node name="controller" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1024, 824 )
+position = Vector2( 1026, 822 )
 transmitting = [ NodePath("../pylon") ]
 
 [node name="pylon" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1024, 800 )
+position = Vector2( 1026, 798 )
 transmitting = [ NodePath("../miner"), NodePath("../fighter") ]
 
 [node name="miner" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1000, 800 )
+position = Vector2( 1002, 798 )
 
 [node name="fighter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1000, 824 )
+position = Vector2( 1002, 822 )
 
 [node name="commands" parent="." instance=ExtResource( 6 )]
 
@@ -50,29 +103,68 @@ __meta__ = {
 }
 
 [node name="fighter" type="Button" parent="spawning"]
-margin_right = 40.0
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 32.0
 margin_bottom = 20.0
-text = "fighter"
+
+[node name="Sprite" type="Sprite" parent="spawning/fighter"]
+z_index = 10
+texture = ExtResource( 16 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 48, 32, 16 )
 
 [node name="miner" type="Button" parent="spawning"]
+self_modulate = Color( 1, 1, 1, 0 )
 margin_top = 24.0
-margin_right = 40.0
+margin_right = 32.0
 margin_bottom = 44.0
-text = "miner"
+
+[node name="Sprite" type="Sprite" parent="spawning/miner"]
+z_index = 10
+texture = ExtResource( 16 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 16 )
 
 [node name="pylon" type="Button" parent="spawning"]
+self_modulate = Color( 1, 1, 1, 0 )
 margin_top = 48.0
-margin_right = 40.0
+margin_right = 32.0
 margin_bottom = 68.0
-text = "pylon"
 
-[node name="grid_selection_icon" type="Sprite" parent="."]
-texture = ExtResource( 11 )
+[node name="Sprite" type="Sprite" parent="spawning/pylon"]
+z_index = 10
+texture = ExtResource( 16 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 16 )
+
+[node name="grid_selection_icon" type="AnimatedSprite" parent="."]
+z_index = -1
+frames = SubResource( 3 )
+playing = true
+script = ExtResource( 13 )
+
+[node name="move_selection_icon" type="AnimatedSprite" parent="."]
+visible = false
+z_index = -1
+frames = SubResource( 9 )
+playing = true
+script = ExtResource( 13 )
+
+[node name="pylon_selection_icon" type="AnimatedSprite" parent="."]
+visible = false
+z_index = -1
+frames = SubResource( 6 )
+playing = true
+script = ExtResource( 13 )
 
 [node name="sfx_controller" parent="." instance=ExtResource( 10 )]
 
 [connection signal="beat" from="global_timer" to="pylon" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="miner" method="_on_global_timer_beat"]
+[node name="Star Background" parent="." instance=ExtResource( 12 )]
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="fighter" method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]

@@ -12,6 +12,7 @@ var mouse_on: bool = false
 func _ready():
 	$anim_plr.play("pylon_idle")
 	nav = get_node("../world/nav") as Navigation2D
+	target_pos = position
 
 func _process(delta):
 	if receiver != "":
@@ -21,20 +22,29 @@ func _process(delta):
 func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
+
 	if command == "move":
 		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		pstate = State.Moving
+		var i = 1
+		var j = 1
+		for obj in transmitting:
+			print(name + ": " + get_node(obj).name)
+			if "pylon" in get_node(obj).name:
+				get_node(obj).receiver = "move " + String(splitted_receiver[1].to_float() + 48 * j) + " " + splitted_receiver[2]
+				j += 1
+			else:
+				get_node(obj).receiver = "move " + String(splitted_receiver[1].to_float() + 12 * (i % 4)) + " " + String(splitted_receiver[2].to_float() + 12 * floor(i / 4))
+				i += 1
 	else:
 		for obj in transmitting:
 			get_node(obj).receiver = _receiver
-		if command == "check":
+		if command == "beat":
 			connected = true
+			move_towards_target()
 
 func _on_pylon_mouse_entered():
 	mouse_on = true
 
 func _on_pylon_mouse_exited():
 	mouse_on = false
-
-func _on_global_timer_beat():
-	move_towards_target()
