@@ -29,7 +29,7 @@ func _on_receive(_receiver: String):
 
 func check():
 	for obj in transmitting:
-		get_node(obj).receiver = "check"
+		get_node(obj).receiver = "beat"
 	connected = true
 
 func _on_global_timer_beat():
@@ -39,10 +39,8 @@ func _on_global_timer_beat():
 	check()
 	move_towards_target()
 
-
 func _on_controller_mouse_entered():
 	mouse_on = true
-
 
 func _on_controller_mouse_exited():
 	mouse_on = false

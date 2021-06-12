@@ -27,14 +27,12 @@ func _on_receive(_receiver: String):
 	else:
 		for obj in transmitting:
 			get_node(obj).receiver = _receiver
-		if command == "check":
+		if command == "beat":
 			connected = true
+			move_towards_target()
 
 func _on_pylon_mouse_entered():
 	mouse_on = true
 
 func _on_pylon_mouse_exited():
 	mouse_on = false
-
-func _on_global_timer_beat():
-	move_towards_target()
