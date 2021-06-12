@@ -13,14 +13,12 @@ func _process(dt):
 	var screen_size = get_viewport_rect().size / 2
 	var movement = camera_speed * dt
 
-	print(screen_size)
-
-	if Input.is_action_pressed("control_up") and position.y - screen_size.y - movement > 0:
+	if Input.is_action_pressed("control_up"):# and position.y - screen_size.y - movement > 0:
 		position.y -= movement
-	elif Input.is_action_pressed("control_down") and position.y + screen_size.y + movement < camera_bounds_y_px:
+	elif Input.is_action_pressed("control_down"):# and position.y + screen_size.y + movement < camera_bounds_y_px:
 		position.y += movement
 
-	if Input.is_action_pressed("control_right") and position.x + screen_size.x + movement < camera_bounds_x_px:
+	if Input.is_action_pressed("control_right"):# and position.x + screen_size.x + movement < camera_bounds_x_px:
 		position.x += movement
-	elif Input.is_action_pressed("control_left") and position.x - screen_size.x - movement > 0:
+	elif Input.is_action_pressed("control_left"):# and position.x - screen_size.x - movement > 0:
 		position.x -= movement
