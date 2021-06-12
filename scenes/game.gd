@@ -14,7 +14,7 @@ func _unhandled_input(event):
 				if child.get("mouse_on"):
 					selected = true
 					selection = child
-					$commands.set_position(event.position)
+					$commands.set_position(get_global_mouse_position())
 					$commands.select(selection)
 			if not selected:
 				selection = null
