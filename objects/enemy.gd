@@ -11,6 +11,8 @@ func _ready():
 	enemy_list = []
 	target_pos = position
 	get_owner().get_node("global_timer").connect("beat", self, "_on_global_timer_beat")
+	self.connect("die", get_owner().get_node("sfx_controller"), "_on_die")
+	self.connect("fight", get_owner().get_node("sfx_controller"), "_on_fight")
 
 
 func _update():
@@ -19,13 +21,12 @@ func _update():
 		return
 	
 	var target = find_closest_enemy()
-	print(target)
 	target_pos = target.position
 	move_towards_target()
 	if position.distance_to(target.position) < 12:
 		enemy_list.erase(target)
 		target.queue_free()
-		if rand_range(0, 1.0) > 0.9:
+		if rand_range(0, 1.0) > 0.1:
 			emit_signal("die")
 		else:
 			emit_signal("fight")

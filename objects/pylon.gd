@@ -25,12 +25,7 @@ func _process(delta):
 		receiver = ""
 
 func _on_receive(_receiver: String):
-	var to_remove = []
-	for x in transmitting:
-		if get_node(x) == null:
-			to_remove.append(x)
-	for x in to_remove:
-		transmitting.erase(x)
+	cull_null_transmitees()
 
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
@@ -63,3 +58,12 @@ func _on_pylon_mouse_entered():
 
 func _on_pylon_mouse_exited():
 	mouse_on = false
+
+
+func cull_null_transmitees():
+	var to_remove = []
+	for x in transmitting:
+		if get_node(x) == null:
+			to_remove.append(x)
+	for x in to_remove:
+		transmitting.erase(x)

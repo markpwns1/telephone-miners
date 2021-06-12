@@ -65,6 +65,7 @@ func _unhandled_input(event):
 func _draw():
 	for child in get_children():
 		if child.get("transmitting") != null:
+			child.cull_null_transmitees()
 			for transmittee in child.transmitting:
 				var dir = (child.get_node(transmittee).position - child.position).normalized()
 				draw_line(child.position + dir * 6, child.get_node(transmittee).position - dir * 6, Color(0, 0, 0, 0.5), 1)

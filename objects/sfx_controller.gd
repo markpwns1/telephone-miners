@@ -10,7 +10,7 @@ export var spawnR_clip: AudioStream
 export var spawnH_clip: AudioStream
 
 var backing_track: AudioStreamPlayer
-var fx_player: AudioStreamPlayer2D
+var fx_player: AudioStreamPlayer
 
 var type: int = Sound.None
 
@@ -18,6 +18,7 @@ var type: int = Sound.None
 func _ready():
 	backing_track = $backing
 	fx_player = $sfx
+	get_owner().get_node("global_timer").connect("beat", self, "_on_global_timer_beat")
 
 
 func _process(delta):
@@ -41,17 +42,17 @@ func _on_global_timer_beat():
 	backing_track.volume_db = 0
 
 
-func _on_game_spawn_unit():
+func _on_unit_spawn():
 	type |= Sound.SpawnR
 
-func _on_spawner_spawn_enemy():
+func _on_enemy_spawn():
 	type |= Sound.SpawnH
 
-func _on_miner_mine():
+func _on_mine():
 	type |= Sound.Mine
 
-func _on_fighter_fight():
+func _on_fight():
 	type |= Sound.Fight
 
-func _on_unit_die():
+func _on_die():
 	type |= Sound.Die
