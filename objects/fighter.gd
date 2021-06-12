@@ -1,10 +1,10 @@
 extends Pathfinder
 
-enum State {Idle, Moving, Fighting, Defending, Disconnected}
+enum State { Moving, Fighting, Defending }
 
 var connected = true
 var receiver: String = ""
-var fstate: int = State.Idle
+var fstate: int = State.Defending
 var mouse_on: bool = false
 var defense_spot: Vector2
 
@@ -24,7 +24,9 @@ func _process(delta):
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
-
+	if not is_moving and fstate == State.Moving:
+		fstate = State.Defending
+		defense_spot = position
 func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
@@ -34,9 +36,6 @@ func _on_receive(_receiver: String):
 		fstate = State.Moving
 	elif command == "fight":
 		fstate = State.Fighting
-	elif command == "defend":
-		fstate = State.Defending
-		defense_spot = position
 	elif command == "beat":
 		connected = true
 		if fstate == State.Moving:
@@ -47,6 +46,7 @@ func _on_receive(_receiver: String):
 			if enemy_list.empty():
 				if fstate == State.Defending:
 					target_pos = defense_spot
+					move_towards_target()
 				return
 			target_pos = target.position
 			move_towards_target()

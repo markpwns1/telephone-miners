@@ -2,7 +2,7 @@ extends Pathfinder
 
 export var mine_radius = 12*12
 
-enum State { Idle, Moving, Mining, Disconnected }
+enum State { Idle, Moving, Mining }
 
 var connected = true
 var receiver: String = ""
