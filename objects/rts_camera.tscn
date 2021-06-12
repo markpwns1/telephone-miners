@@ -6,5 +6,9 @@
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1536
+limit_bottom = 1536
 smoothing_enabled = true
 script = ExtResource( 2 )

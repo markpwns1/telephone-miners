@@ -16,11 +16,11 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=512
-window/size/height=512
+window/size/width=768
+window/size/height=768
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
-window/stretch/shrink=4.0
+window/stretch/aspect="keep"
+window/stretch/shrink=3.0
 
 [input]
 
