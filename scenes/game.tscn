@@ -71,9 +71,10 @@ texture = ExtResource( 11 )
 
 [node name="sfx_controller" parent="." instance=ExtResource( 10 )]
 
-[connection signal="beat" from="global_timer" to="miner" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="pylon" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="fighter" method="_on_global_timer_beat"]
+[connection signal="beat" from="global_timer" to="miner" method="_on_global_timer_beat"]
+[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]
