@@ -32,6 +32,7 @@ func _unhandled_input(event):
 						selected = true
 						add_child(selection)
 						child.transmitting.append(selection.get_path())
+						selecting_state = Option.NONE
 						
 			if not selected:
 				selection = null
