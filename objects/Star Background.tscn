@@ -8,13 +8,13 @@ shader = ExtResource( 1 )
 shader_param/space_colour = Plane( 0, 0, 0, 1 )
 shader_param/star_colour = Plane( 1, 1, 1, 1 )
 shader_param/resolution = Vector2( 2048, 2048 )
-shader_param/front_noise_scale = 10.0
-shader_param/mid_noise_scale = 6.0
-shader_param/back_noise_scale = 3.5
-shader_param/front_parallax_mod = 0.5
-shader_param/mid_parallax_mod = 0.2
-shader_param/back_parallax_mod = 0.1
-shader_param/offset = Vector2( 29.958, 0 )
+shader_param/front_noise_scale = 6.0
+shader_param/mid_noise_scale = 4.0
+shader_param/back_noise_scale = 2.0
+shader_param/front_parallax_mod = 0.8
+shader_param/mid_parallax_mod = 0.5
+shader_param/back_parallax_mod = 0.3
+shader_param/offset = Vector2( 29.958, 40 )
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
