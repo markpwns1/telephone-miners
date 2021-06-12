@@ -4,9 +4,14 @@ export var island_falloff = 20
 export var size_x = 128
 export var size_y = 128
 
+export var ore_count = 20
+
+var rng = RandomNumberGenerator.new()
 var noise = OpenSimplexNoise.new()
 
 var center = Vector2(0.5, 0.5)
+
+onready var ore = preload("res://objects/ore.tscn")
 
 func _ready():
 	noise.seed = randi()
@@ -23,5 +28,18 @@ func _ready():
 			if height > 0:
 				set_cell(x, y, 2)
 				set_cell(x, y - 1, 0)
-			else:
-				set_cell(x, y, 1)
+
+	var i = 0
+	while i < ore_count:
+		var x = rng.randi_range(0, 128)
+		var y = rng.randi_range(0, 128)
+		while get_cell(x, y) == 2:
+			x = rng.randi_range(0, 128)
+			y = rng.randi_range(0, 128)
+
+		var inst = ore.instance()
+		inst.position.x = x * 12
+		inst.position.y = y * 12
+		i += 1
+
+		print(inst.position)

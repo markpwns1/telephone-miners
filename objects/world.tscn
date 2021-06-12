@@ -85,3 +85,4 @@ tile_set = SubResource( 5 )
 cell_size = Vector2( 12, 12 )
 format = 1
 script = ExtResource( 2 )
+ore_count = 100
