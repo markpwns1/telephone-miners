@@ -22,7 +22,6 @@ func _update():
 		return
 	
 	var target = find_closest_enemy()
-	print(target)
 	target_pos = target.position
 	move_towards_target()
 	if position.distance_to(target.position) < 12:
