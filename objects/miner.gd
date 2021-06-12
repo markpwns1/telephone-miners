@@ -3,7 +3,8 @@ extends Area2D
 enum State {Idle, Moving, Mining}
 
 var receiver: String = ""
-var state: int = State.Idle
+var mstate: int = State.Idle
+var mouse_on: bool = false
 
 func _process(delta):
 	if receiver != "":
@@ -15,6 +16,12 @@ func _on_receive(_receiver: String):
 	var command = splitted_receiver[0]
 	if command == "move":
 		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		state = State.Moving
+		mstate = State.Moving
 	elif command == "mine":
-		state = State.Mining
+		mstate = State.Mining
+
+func _on_miner_mouse_entered():
+	mouse_on = true
+
+func _on_miner_mouse_exited():
+	mouse_on = false
