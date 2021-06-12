@@ -13,6 +13,11 @@ func _ready():
 	$anim_plr.play("pylon_idle")
 	nav = get_node("../world/nav") as Navigation2D
 	target_pos = position
+	
+	var inspector_transmit = transmitting
+	transmitting = []
+	for x in inspector_transmit:
+		transmitting.append(x)
 
 func _process(delta):
 	if receiver != "":
@@ -36,6 +41,9 @@ func _on_receive(_receiver: String):
 			else:
 				get_node(obj).receiver = "move " + String(splitted_receiver[1].to_float() + 12 * (i % 4)) + " " + String(splitted_receiver[2].to_float() + 12 * floor(i / 4))
 				i += 1
+	elif command == "smove":
+		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+		pstate = State.Moving
 	else:
 		for obj in transmitting:
 			get_node(obj).receiver = _receiver
