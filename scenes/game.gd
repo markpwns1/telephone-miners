@@ -8,6 +8,7 @@ export var pylon_prefab: PackedScene
 
 var selecting_state = Option.NONE
 var selection: Node
+var stealth = false
 
 var spawning_position: Vector2
 
@@ -28,6 +29,8 @@ func _unhandled_input(event):
 						$commands.set_position(get_global_mouse_position() - menu_offset)
 						$commands.select(selection)
 						$spawning.hide()
+						if Input.is_action_pressed("control_stealth"):
+							stealth = true
 					elif child.get("transmitting") != null:
 						selected = true
 						add_child(selection)
@@ -49,7 +52,11 @@ func _unhandled_input(event):
 			selecting_state = Option.NONE
 			$move_selection_icon.visible = false
 			$grid_selection_icon.visible = true
-			selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
+			if stealth:
+				selection.receiver = "smove " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
+			else:
+				selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
+			stealth = false
 
 func _draw():
 	for child in get_children():
@@ -58,6 +65,8 @@ func _draw():
 				draw_line(child.position, child.get_node(transmittee).position, Color(0, 0, 0, 0.5), 1)
 
 func _on_move_pressed():
+	if Input.is_action_pressed("control_stealth"):
+		stealth = true
 	selecting_state = Option.MOVING_TO
 	$commands.hide()
 	$move_selection_icon.visible = true
