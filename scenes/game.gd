@@ -38,15 +38,17 @@ func _unhandled_input(event):
 						$pylon_selection_icon.visible = false
 						$grid_selection_icon.visible = true
 						selecting_state = Option.NONE
+						currency -= 1
 						
 			if not selected:
 				selection = null
 				$commands.hide()
-				$spawning.set_position(get_global_mouse_position())
-				$spawning.visible = !$spawning.visible
-				spawning_position = $move_selection_icon.position
-				$grid_selection_icon.visible = true
-				$pylon_selection_icon.visible = false
+				if currency > 0:
+					$spawning.set_position(get_global_mouse_position())
+					$spawning.visible = !$spawning.visible
+					spawning_position = $move_selection_icon.position
+					$grid_selection_icon.visible = true
+					$pylon_selection_icon.visible = false
 				selecting_state = Option.NONE
 		else:
 			selecting_state = Option.NONE
@@ -111,4 +113,5 @@ func configure_spawn_ui():
 	$grid_selection_icon.visible = false
 
 func _on_global_timer_beat():
+	get_node("rts_camera/camera/currency").text = String(currency)
 	update()

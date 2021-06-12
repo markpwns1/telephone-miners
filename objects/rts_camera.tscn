@@ -10,3 +10,13 @@ limit_left = -100000000
 limit_top = -100000000
 smoothing_enabled = true
 script = ExtResource( 2 )
+
+[node name="currency" type="Label" parent="camera"]
+modulate = Color( 0.27451, 0.27451, 0.27451, 1 )
+margin_left = -128.0
+margin_top = -128.0
+margin_right = -88.0
+margin_bottom = -114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
