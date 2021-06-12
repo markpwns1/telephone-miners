@@ -44,11 +44,11 @@ func find_closest_enemy():
 
 
 
-func _on_fighter_area_entered(area: Area2D):
+func _on_detection_range_area_entered(area: Area2D):
 	if area.is_in_group("robots"):
 		enemy_list.append(area)
 
-func _on_fighter_area_exited(area: Area2D):
+func _on_detection_range_area_exited(area: Area2D):
 	if area == null:
 		return
 	if area in enemy_list:
