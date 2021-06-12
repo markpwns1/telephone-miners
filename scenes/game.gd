@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Game
+
 enum Option {NONE, MOVING_TO, SPAWNING}
 
 export var fighter_prefab: PackedScene

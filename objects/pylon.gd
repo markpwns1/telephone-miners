@@ -30,6 +30,7 @@ func _on_receive(_receiver: String):
 
 	if command == "move":
 		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+		is_moving = true
 		pstate = State.Moving
 		var i = 1
 		var j = 1

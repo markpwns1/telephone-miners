@@ -21,6 +21,7 @@ func _on_receive(_receiver: String):
 	var command = splitted_receiver[0]
 	if command == "move":
 		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+		is_moving = true
 		fstate = State.Moving
 	elif command == "fight":
 		fstate = State.Fighting
