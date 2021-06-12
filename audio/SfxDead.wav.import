@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SfxDead.wav-bed68eae39b2946d1959d653f6e6b3fe.sample"
+
+[deps]
+
+source_file="res://audio/SfxDead.wav"
+dest_files=[ "res://.import/SfxDead.wav-bed68eae39b2946d1959d653f6e6b3fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

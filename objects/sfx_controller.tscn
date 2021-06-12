@@ -1,0 +1,28 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://objects/sfx_controller.gd" type="Script" id=1]
+[ext_resource path="res://audio/SFXSpawnHuman.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/SfxDead.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/SfxFight.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/SfxMine.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/XMXTestLoopSnareandHiHats.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/SFXSpawnRobot.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/XMXTestLoopBassAndKick.wav" type="AudioStream" id=8]
+
+[node name="sfx_controller" type="Node2D"]
+script = ExtResource( 1 )
+mine_clip = ExtResource( 5 )
+die_clip = ExtResource( 3 )
+fight_clip = ExtResource( 4 )
+spawnR_clip = ExtResource( 7 )
+spawnH_clip = ExtResource( 2 )
+
+[node name="Main Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="backing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
