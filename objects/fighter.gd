@@ -43,7 +43,6 @@ func _on_receive(_receiver: String):
 			var target = find_closest_enemy()
 			if enemy_list.empty():
 				return
-			print(enemy_list)
 			target_pos = target.position
 			move_towards_target()
 			if position.distance_to(target.position) < 12:
