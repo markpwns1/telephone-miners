@@ -13,6 +13,18 @@ var center = Vector2(0.5, 0.5)
 
 onready var ore = preload("res://objects/ore.tscn")
 
+const ISLAND_HEIGHT = 3
+
+func get_position_with_difficulty_dist():
+	var x = rng.randi_range(0, 128)
+	var y = rng.randi_range(0, 128)
+
+	while get_cell(x, y) != 1 or y > rng.randi_range(0, 128):
+		x = rng.randi_range(0, 128)
+		y = rng.randi_range(0, 128)
+
+	return Vector2(x, y)
+
 func _ready():
 	noise.seed = randi()
 	noise.octaves = 4
@@ -26,24 +38,16 @@ func _ready():
 			v *= 60
 			var height = noise.get_noise_2dv(v) + 0.5 - dist * 2
 			if height > 0:
-				set_cell(x, y, 2)
-				set_cell(x, y - 1, 1)
+				for i in range(ISLAND_HEIGHT):
+					set_cell(x, y - 1, 2)
+				set_cell(x, y - ISLAND_HEIGHT, 1)
 
 	var i = 0
 	while i < ore_count:
-		var x = rng.randi_range(0, 128)
-		var y = rng.randi_range(0, 128)
-
-		while get_cell(x, y) != 1 or y > rng.randi_range(0, 128):
-			x = rng.randi_range(0, 128)
-			y = rng.randi_range(0, 128)
-
+		var pos = get_position_with_difficulty_dist()
 		var inst = ore.instance()
-		inst.position.x = x * 12 + 6
-		inst.position.y = y * 12 + 6
-
+		inst.position = pos * 12 + Vector2(6, 6)
 		add_child(inst)
-
 		i += 1
 
 		# print(inst.position)
