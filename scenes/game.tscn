@@ -35,17 +35,17 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 18 )
 region = Rect2( 0, 0, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 18 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -161,7 +161,7 @@ script = ExtResource( 13 )
 [node name="move_selection_icon" type="AnimatedSprite" parent="."]
 visible = false
 z_index = -1
-frames = SubResource( 13 )
+frames = SubResource( 6 )
 playing = true
 script = ExtResource( 13 )
 
@@ -184,6 +184,7 @@ position = Vector2( 903.363, 653.899 )
 
 [node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
+
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]

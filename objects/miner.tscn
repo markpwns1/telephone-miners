@@ -1,26 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/miner.gd" type="Script" id=1]
 [ext_resource path="res://assets/miner_idle.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=1]
-resource_name = "miner idle"
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("miner_sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
 [node name="miner" type="Area2D" groups=[
@@ -35,9 +18,9 @@ frame = 1
 
 [node name="anim_plr" type="AnimationPlayer" parent="."]
 autoplay = "miner idle"
-"anims/miner idle" = SubResource( 1 )
 
 [node name="collider" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
+
 [connection signal="mouse_entered" from="." to="." method="_on_miner_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_miner_mouse_exited"]
