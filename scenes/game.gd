@@ -30,8 +30,8 @@ func _unhandled_input(event):
 						$spawning.hide()
 					elif child.get("transmitting") != null:
 						selected = true
-						child.transmitting.append(selection)
 						add_child(selection)
+						child.transmitting.append(selection.get_path())
 						
 			if not selected:
 				selection = null
