@@ -5,6 +5,8 @@ enum Option {NONE, MOVING_TO}
 var selecting_state = Option.NONE
 var selection: Node
 
+var currency: int = 0
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.is_pressed():
 		if selecting_state == Option.NONE:
@@ -42,3 +44,13 @@ func _on_defend_pressed():
 	selection.receiver = "defend"
 	selection = null
 	$commands.hide()
+
+
+func _on_miner_pressed():
+	print("miner spawned")
+
+func _on_fighter_pressed():
+	print("fighter spanwed")
+
+func _on_pylon_pressed():
+	print("pylon spawned")
