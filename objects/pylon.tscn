@@ -24,7 +24,9 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 6 )
 
-[node name="pylon" type="Area2D"]
+[node name="pylon" type="Area2D" groups=[
+"robots",
+]]
 script = ExtResource( 2 )
 
 [node name="pylon_sprite" type="Sprite" parent="."]

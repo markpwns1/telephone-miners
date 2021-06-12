@@ -25,6 +25,13 @@ func _process(delta):
 		receiver = ""
 
 func _on_receive(_receiver: String):
+	var to_remove = []
+	for x in transmitting:
+		if get_node(x) == null:
+			to_remove.append(x)
+	for x in to_remove:
+		transmitting.erase(x)
+
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 
@@ -35,7 +42,6 @@ func _on_receive(_receiver: String):
 		var i = 1
 		var j = 1
 		for obj in transmitting:
-			print(name + ": " + get_node(obj).name)
 			if "pylon" in get_node(obj).name:
 				get_node(obj).receiver = "move " + String(splitted_receiver[1].to_float() + 48 * j) + " " + splitted_receiver[2]
 				j += 1

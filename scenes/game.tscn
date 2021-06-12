@@ -14,7 +14,7 @@
 [ext_resource path="res://objects/Star Background.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/lock_position_to_grid.gd" type="Script" id=13]
 [ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
-[ext_resource path="res://assets/movement selection icon.png" type="Texture" id=15]
+[ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -34,11 +34,11 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 15 )
+atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 15 )
+atlas = ExtResource( 14 )
 region = Rect2( 0, 12, 12, 12 )
 
 [sub_resource type="SpriteFrames" id=6]
@@ -70,7 +70,6 @@ script = ExtResource( 7 )
 fighter_prefab = ExtResource( 5 )
 miner_prefab = ExtResource( 1 )
 pylon_prefab = ExtResource( 3 )
-currency = 10000
 
 [node name="global_timer" parent="." instance=ExtResource( 9 )]
 
@@ -168,6 +167,8 @@ script = ExtResource( 13 )
 
 [node name="Star Background" parent="." instance=ExtResource( 12 )]
 
+[node name="enemy" parent="." instance=ExtResource( 15 )]
+position = Vector2( 903.363, 653.899 )
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]

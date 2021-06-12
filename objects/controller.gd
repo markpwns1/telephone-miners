@@ -12,6 +12,7 @@ var connected: bool = true # Constant
 
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
+	target_pos = position
 
 func _process(delta):
 	if receiver != "":
@@ -19,6 +20,13 @@ func _process(delta):
 		receiver = ""
 
 func _on_receive(_receiver: String):
+	var to_remove = []
+	for x in transmitting:
+		if get_node(x) == null:
+			to_remove.append(x)
+	for x in to_remove:
+		transmitting.erase(x)
+
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":
