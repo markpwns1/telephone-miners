@@ -20,6 +20,13 @@ func _process(delta):
 		receiver = ""
 
 func _on_receive(_receiver: String):
+	var to_remove = []
+	for x in transmitting:
+		if get_node(x) == null:
+			to_remove.append(x)
+	for x in to_remove:
+		transmitting.erase(x)
+
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":

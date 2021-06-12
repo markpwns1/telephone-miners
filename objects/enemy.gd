@@ -12,11 +12,10 @@ func _ready():
 	target_pos = position
 	print(get_owner().name)
 	get_owner().get_node("global_timer").connect("beat", self, "_on_global_timer_beat")
-	is_moving = true
 
 
 func _update():
-	print("update")
+	is_moving = true
 	if enemy_list.empty():
 		return
 	
