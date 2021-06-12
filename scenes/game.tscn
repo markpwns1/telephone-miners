@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://objects/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/controller.tscn" type="PackedScene" id=2]
@@ -65,6 +65,9 @@ animations = [ {
 "speed": 2.0
 } ]
 
+[sub_resource type="CircleShape2D" id=10]
+radius = 120.0
+
 [node name="game" type="Node2D"]
 script = ExtResource( 7 )
 fighter_prefab = ExtResource( 5 )
@@ -87,7 +90,7 @@ transmitting = [ NodePath("../miner"), NodePath("../fighter") ]
 position = Vector2( 1002, 798 )
 
 [node name="fighter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1002, 822 )
+position = Vector2( 1002.67, 822 )
 
 [node name="commands" parent="." instance=ExtResource( 6 )]
 
@@ -143,6 +146,7 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -150,6 +154,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -157,6 +162,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -166,6 +172,11 @@ script = ExtResource( 13 )
 
 [node name="enemy" parent="." instance=ExtResource( 15 )]
 position = Vector2( 903.363, 653.899 )
+
+[node name="cursor_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cursor_range"]
+shape = SubResource( 10 )
 
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]

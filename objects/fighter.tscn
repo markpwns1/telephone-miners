@@ -24,11 +24,11 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 48, 48 )
+[sub_resource type="CircleShape2D" id=3]
+radius = 48.0
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 120, 120 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 120.0
 
 [node name="fighter" type="Area2D" groups=[
 "robots",
