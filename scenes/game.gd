@@ -55,7 +55,8 @@ func _draw():
 	for child in get_children():
 		if child.get("transmitting") != null:
 			for transmittee in child.transmitting:
-				draw_line(child.position, child.get_node(transmittee).position, Color(0, 0, 0, 0.5), 1)
+				var dir = (child.get_node(transmittee).position - child.position).normalized()
+				draw_line(child.position + dir * 6, child.get_node(transmittee).position - dir * 6, Color(0, 0, 0, 0.5), 1)
 
 func _on_move_pressed():
 	selecting_state = Option.MOVING_TO
