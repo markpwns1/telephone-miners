@@ -1,6 +1,6 @@
 extends Node2D
 
-export var beats_per_second = 2.0
+export var beats_per_second = 1.0
 
 var beat_interval = 1.0 / beats_per_second
 
