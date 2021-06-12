@@ -5,7 +5,6 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "pylon_idle"
-length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -15,7 +14,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.001, 0.25 ),
+"times": PoolRealArray( 0, 0.001, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 0, 1 ]
@@ -39,6 +38,5 @@ anims/pylon_idle = SubResource( 1 )
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
 [connection signal="mouse_entered" from="." to="." method="_on_pylon_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_pylon_mouse_exited"]

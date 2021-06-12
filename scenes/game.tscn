@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://objects/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/controller.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
 [ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
+[ext_resource path="res://assets/movement selection icon.png" type="Texture" id=18]
+[ext_resource path="res://assets/selection.png" type="Texture" id=19]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 11 )
@@ -33,17 +35,17 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 14 )
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 18 )
 region = Rect2( 0, 0, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 14 )
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 18 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -146,13 +148,20 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
+frame = 1
 playing = true
+script = ExtResource( 13 )
+
+[node name="selection_icon" type="Sprite" parent="."]
+visible = false
+z_index = -1
+texture = ExtResource( 19 )
 script = ExtResource( 13 )
 
 [node name="move_selection_icon" type="AnimatedSprite" parent="."]
 visible = false
 z_index = -1
-frames = SubResource( 6 )
+frames = SubResource( 13 )
 playing = true
 script = ExtResource( 13 )
 
@@ -160,6 +169,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -174,7 +184,6 @@ position = Vector2( 903.363, 653.899 )
 
 [node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
-
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]

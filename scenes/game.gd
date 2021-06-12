@@ -24,6 +24,8 @@ func _ready():
 	self.connect("spawn_unit", get_node("sfx_controller"), "_on_unit_spawn")
 	available_pylon = []
 	connectable_pylon = []
+	$selection_icon.follow_mouse = false
+	$selection_icon.visible = false
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.is_pressed():
@@ -41,6 +43,9 @@ func _unhandled_input(event):
 						$commands.set_position(get_global_mouse_position() - menu_offset)
 						$commands.select(selection)
 						$spawning.hide()
+						
+						$selection_icon.visible = true
+						$selection_icon.follow_node(child)
 						if Input.is_action_pressed("control_stealth"):
 							stealth = true
 					elif child in connectable_pylon:
@@ -49,6 +54,7 @@ func _unhandled_input(event):
 						child.transmitting.append(selection.get_path())
 						$pylon_selection_icon.visible = false
 						$grid_selection_icon.visible = true
+						$selection_icon.visible = false
 						selecting_state = Option.NONE
 						currency -= 1
 						emit_signal("spawn_unit")
@@ -64,6 +70,9 @@ func _unhandled_input(event):
 					spawning_position = $move_selection_icon.position
 					$grid_selection_icon.visible = true
 					$pylon_selection_icon.visible = false
+					$selection_icon.visible = true
+					$selection_icon.position = spawning_position
+					$selection_icon.follow_node(null)
 				selecting_state = Option.NONE
 		else:
 			selecting_state = Option.NONE
@@ -74,6 +83,7 @@ func _unhandled_input(event):
 			else:
 				selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
 			stealth = false
+			$selection_icon.visible = false
 
 func _draw():
 	for child in get_children():
@@ -96,18 +106,21 @@ func _on_mine_pressed():
 	selection = null
 	$commands.hide()
 	$grid_selection_icon.visible = true
+	$selection_icon.visible = false
 
 func _on_fight_pressed():
 	selection.receiver = "fight"
 	selection = null
 	$commands.hide()
 	$grid_selection_icon.visible = true
+	$selection_icon.visible = false
 
 func _on_defend_pressed():
 	selection.receiver = "defend"
 	selection = null
 	$commands.hide()
 	$grid_selection_icon.visible = true
+	$selection_icon.visible = false
 
 func _on_miner_pressed():
 	selection = miner_prefab.instance()
