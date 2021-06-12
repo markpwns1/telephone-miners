@@ -1,6 +1,0 @@
-[gd_scene format=2]
-
-[node name="rts_camera" type="Node2D"]
-
-[node name="camera" type="Camera2D" parent="."]
-smoothing_enabled = true
