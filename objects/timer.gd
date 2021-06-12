@@ -13,6 +13,3 @@ func _process(dt):
 	if timer >= beat_interval:
 		timer -= beat_interval
 		emit_signal("beat")
-
-func _on_global_timer_beat():
-	pass # Replace with function body.
