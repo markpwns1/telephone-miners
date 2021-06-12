@@ -15,6 +15,8 @@ func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	target_pos = position
 	enemy_list = []
+	enemy_fight_detected = []
+	enemy_defend_detected = []
 	
 func _process(delta):
 	if receiver != "":
@@ -36,11 +38,12 @@ func _on_receive(_receiver: String):
 		connected = true
 		if fstate == State.Moving:
 			move_towards_target()
-		elif fstate == State.Fighting:
+		elif fstate == State.Fighting or fstate == State.Defending:
+			is_moving = true
+			var target = find_closest_enemy()
 			if enemy_list.empty():
 				return
-			
-			var target = find_closest_enemy()
+			print(enemy_list)
 			target_pos = target.position
 			move_towards_target()
 			if position.distance_to(target.position) < 12:
@@ -56,6 +59,8 @@ func find_closest_enemy():
 		enemy_list = enemy_fight_detected
 	else:
 		enemy_list = enemy_defend_detected
+	if enemy_list.empty():
+		return
 	var closest = enemy_list[0]
 	var dist = position.distance_to(closest.position)
 	for e in enemy_list:
@@ -81,9 +86,8 @@ func _on_fighter_defend_range_area_entered(area):
 func _on_fighter_defend_range_area_exited(area):
 	if area == null:
 		pass
-	if area.is_in_group("enemies"):
-		if area in enemy_defend_detected:
-			enemy_defend_detected.erase(area)
+	if area in enemy_defend_detected:
+		enemy_defend_detected.erase(area)
 
 
 func _on_fighter_fight_range_area_entered(area):
@@ -94,6 +98,5 @@ func _on_fighter_fight_range_area_entered(area):
 func _on_fighter_fight_range_area_exited(area):
 	if area == null:
 		pass
-	if area.is_in_group("enemies"):
-		if area in enemy_fight_detected:
-			enemy_fight_detected.erase(area)
+	if area in enemy_fight_detected:
+		enemy_fight_detected.erase(area)
