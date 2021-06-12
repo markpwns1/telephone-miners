@@ -27,19 +27,19 @@ func _ready():
 			var height = noise.get_noise_2dv(v) + 0.5 - dist * 2
 			if height > 0:
 				set_cell(x, y, 2)
-				set_cell(x, y - 1, 0)
+				set_cell(x, y - 1, 1)
 
-	var i = 0
-	while i < ore_count:
-		var x = rng.randi_range(0, 128)
-		var y = rng.randi_range(0, 128)
-		while get_cell(x, y) == 2:
-			x = rng.randi_range(0, 128)
-			y = rng.randi_range(0, 128)
+	# var i = 0
+	# while i < ore_count:
+	# 	var x = rng.randi_range(0, 128)
+	# 	var y = rng.randi_range(0, 128)
+	# 	while get_cell(x, y) == 2:
+	# 		x = rng.randi_range(0, 128)
+	# 		y = rng.randi_range(0, 128)
 
-		var inst = ore.instance()
-		inst.position.x = x * 12
-		inst.position.y = y * 12
-		i += 1
+	# 	var inst = ore.instance()
+	# 	inst.position.x = x * 12
+	# 	inst.position.y = y * 12
+	# 	i += 1
 
-		print(inst.position)
+	# 	print(inst.position)

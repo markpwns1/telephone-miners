@@ -101,5 +101,6 @@ void fragment(){
 
 	    
 	    COLOR.xyz += vec3(radialGradient);
+		COLOR.xyz = vec3(step(COLOR.x, 0.5), step(COLOR.y, 0.5), step(COLOR.z, 0.5));
     }
 }
