@@ -40,6 +40,7 @@ func _unhandled_input(event):
 				$spawning.set_position(get_global_mouse_position())
 				$spawning.visible = !$spawning.visible
 				spawning_position = $grid_selection_icon.position
+				selecting_state = Option.NONE
 		else:
 			selecting_state = Option.NONE
 			selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
