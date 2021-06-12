@@ -47,6 +47,7 @@ func _on_receive(_receiver: String):
 			if enemy_list.empty():
 				if fstate == State.Defending:
 					target_pos = defense_spot
+					move_towards_target()
 				return
 			target_pos = target.position
 			move_towards_target()
