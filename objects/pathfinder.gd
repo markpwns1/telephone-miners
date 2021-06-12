@@ -26,5 +26,5 @@ func move_towards_target():
 	resolve_path()
 
 	if path and path[1]:
-		var dist_to_next_node = position.distance_to(path[1])
-		position += (path[1] - position).normalized() * min(12, dist_to_next_node)
+		var dist_to_next_node = position.distance_to(path[1].floor())
+		position += (path[1].floor() - position).normalized() * min(12, dist_to_next_node)

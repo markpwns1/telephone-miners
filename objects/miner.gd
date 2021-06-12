@@ -18,7 +18,7 @@ signal mine
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	target_pos = position
-	connect("mine", get_owner().get_node("sfx_controller"), "_on_mine")
+	connect("mine", get_tree().root.get_child(0).get_node("sfx_controller"), "_on_mine")
 
 func _process(dt):
 	if receiver != "":
@@ -32,7 +32,7 @@ func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":
-		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float()).floor()
 		is_moving = true
 		to_mine = [ ]
 
