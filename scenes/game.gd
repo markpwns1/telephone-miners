@@ -16,6 +16,10 @@ var spawning_position: Vector2
 
 export var currency: int = 0
 
+signal spawn_unit
+func _ready():
+	self.connect("spawn_unit", get_node("sfx_controller"), "_on_unit_spawn")
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.is_pressed():
 		$move_selection_icon.position = Vector2(6, 6) + (get_global_mouse_position() / 12).floor() * 12
@@ -41,6 +45,8 @@ func _unhandled_input(event):
 						$grid_selection_icon.visible = true
 						selecting_state = Option.NONE
 						currency -= 1
+						emit_signal("spawn_unit")
+						print("signal sent")
 						
 			if not selected:
 				selection = null

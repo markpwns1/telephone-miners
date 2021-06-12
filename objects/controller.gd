@@ -28,8 +28,8 @@ func _on_receive(_receiver: String):
 		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		is_moving = true
 		pstate = State.Moving
-		var i = 0
-		var j = 0
+		var i = 1
+		var j = 1
 		var x = splitted_receiver[1].to_float()
 		var y = splitted_receiver[2].to_float()
 		for obj in transmitting:
