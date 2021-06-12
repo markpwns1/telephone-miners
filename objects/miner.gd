@@ -20,13 +20,23 @@ func _ready():
 	target_pos = position
 	connect("mine", get_tree().root.get_child(0).get_node("sfx_controller"), "_on_mine")
 
-func _process(dt):
+func _process(_dt):
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
+	update()
 
 func sort_by_distance(a, b):
 	return is_instance_valid(a) and is_instance_valid(b) and (position.distance_squared_to(a.position) < position.distance_squared_to(b.position))
+
+# WHY TF ISNT THIS WORKING!!!!
+# it's supposed to draw the miner's path
+func _draw():
+	draw_circle(position, 20, Color.blue) # testing, remove this after
+	var p = position
+	for pos in path:
+		draw_line(p, pos, Color.blue)
+		p = pos
 
 func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
