@@ -1,9 +1,9 @@
 extends Area2D
 
-enum State {Idle, Moving, Mining}
+enum State {Idle, Moving, Fighting, Defending}
 
 var receiver: String = ""
-var mstate: int = State.Idle
+var fstate: int = State.Idle
 var mouse_on: bool = false
 
 func _process(delta):
@@ -16,12 +16,16 @@ func _on_receive(_receiver: String):
 	var command = splitted_receiver[0]
 	if command == "move":
 		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		mstate = State.Moving
-	elif command == "mine":
-		mstate = State.Mining
+		fstate = State.Moving
+	elif command == "fight":
+		fstate = State.Fighting
+	elif command == "defend":
+		fstate = State.Defending
 
-func _on_miner_mouse_entered():
+
+func _on_fighter_mouse_entered():
 	mouse_on = true
 
-func _on_miner_mouse_exited():
+
+func _on_fighter_mouse_exited():
 	mouse_on = false
