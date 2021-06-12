@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Pathfinder",
+"language": "GDScript",
+"path": "res://objects/pathfinder.gd"
+} ]
 _global_script_class_icons={
-
+"Pathfinder": ""
 }
 
 [application]

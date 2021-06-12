@@ -27,3 +27,7 @@ func _on_pylon_mouse_entered():
 
 func _on_pylon_mouse_exited():
 	mouse_on = false
+
+func _on_global_timer_beat():
+	# move_towards_target()
+	pass

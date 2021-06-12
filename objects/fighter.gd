@@ -1,4 +1,4 @@
-extends Area2D
+extends Pathfinder
 
 enum State {Idle, Moving, Fighting, Defending, Disconnected}
 
@@ -7,6 +7,9 @@ var receiver: String = ""
 var fstate: int = State.Idle
 var mouse_on: bool = false
 
+func _ready():
+	nav = get_node("../world/nav") as Navigation2D
+	
 func _process(delta):
 	if receiver != "":
 		_on_receive(receiver)
@@ -16,7 +19,7 @@ func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":
-		var coord = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		fstate = State.Moving
 	elif command == "fight":
 		fstate = State.Fighting
@@ -30,3 +33,6 @@ func _on_fighter_mouse_entered():
 
 func _on_fighter_mouse_exited():
 	mouse_on = false
+
+func _on_global_timer_beat():
+	move_towards_target()
