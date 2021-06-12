@@ -29,17 +29,21 @@ func _ready():
 				set_cell(x, y, 2)
 				set_cell(x, y - 1, 1)
 
-	# var i = 0
-	# while i < ore_count:
-	# 	var x = rng.randi_range(0, 128)
-	# 	var y = rng.randi_range(0, 128)
-	# 	while get_cell(x, y) == 2:
-	# 		x = rng.randi_range(0, 128)
-	# 		y = rng.randi_range(0, 128)
+	var i = 0
+	while i < ore_count:
+		var x = rng.randi_range(0, 128)
+		var y = rng.randi_range(0, 128)
 
-	# 	var inst = ore.instance()
-	# 	inst.position.x = x * 12
-	# 	inst.position.y = y * 12
-	# 	i += 1
+		while get_cell(x, y) != 1 or y > rng.randi_range(0, 128):
+			x = rng.randi_range(0, 128)
+			y = rng.randi_range(0, 128)
 
-	# 	print(inst.position)
+		var inst = ore.instance()
+		inst.position.x = x * 12 + 6
+		inst.position.y = y * 12 + 6
+
+		add_child(inst)
+
+		i += 1
+
+		# print(inst.position)

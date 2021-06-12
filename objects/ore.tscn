@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/resource_rock.png" type="Texture" id=1]
+[ext_resource path="res://assets/resource_rock_redone.png" type="Texture" id=1]
 
 [node name="ore" type="Node2D"]
 
