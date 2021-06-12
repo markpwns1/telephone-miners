@@ -169,6 +169,7 @@ script = ExtResource( 13 )
 
 [node name="enemy" parent="." instance=ExtResource( 15 )]
 position = Vector2( 903.363, 653.899 )
+
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
