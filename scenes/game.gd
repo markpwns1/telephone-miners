@@ -13,7 +13,9 @@ func _unhandled_input(event):
 				if child.get("mouse_on") and child.get("connected"):
 					selected = true
 					selection = child
-					$commands.set_position(get_global_mouse_position())
+
+					var menu_offset = $commands.rect_pivot_offset
+					$commands.set_position(get_global_mouse_position() - menu_offset)
 					$commands.select(selection)
 			if not selected:
 				selection = null

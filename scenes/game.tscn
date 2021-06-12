@@ -5,7 +5,7 @@
 [ext_resource path="res://objects/pylon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/rts_camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/fighter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/commands.gd" type="Script" id=6]
+[ext_resource path="res://scenes/commands.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game.gd" type="Script" id=7]
 [ext_resource path="res://objects/world.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/timer.tscn" type="PackedScene" id=9]
@@ -32,47 +32,11 @@ position = Vector2( 996.25, 863.353 )
 [node name="fighter2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1046.51, 891.673 )
 
-[node name="commands" type="VBoxContainer" parent="."]
-margin_right = 63.0
-margin_bottom = 92.0
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="move" type="Button" parent="commands"]
-margin_right = 63.0
-margin_bottom = 20.0
-text = "move"
-
-[node name="mine" type="Button" parent="commands"]
-margin_top = 24.0
-margin_right = 63.0
-margin_bottom = 44.0
-text = "mine"
-
-[node name="fight" type="Button" parent="commands"]
-margin_top = 48.0
-margin_right = 63.0
-margin_bottom = 68.0
-text = "fight"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="defend" type="Button" parent="commands"]
-margin_top = 72.0
-margin_right = 63.0
-margin_bottom = 92.0
-text = "defend"
+[node name="commands" parent="." instance=ExtResource( 6 )]
+rect_pivot_offset = Vector2( 40, 32 )
 
 [node name="rts_camera" parent="." instance=ExtResource( 4 )]
 position = Vector2( 980.83, 813 )
 
 [node name="global_timer" parent="." instance=ExtResource( 9 )]
-
-[connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
-[connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
-[connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]
-[connection signal="pressed" from="commands/defend" to="." method="_on_defend_pressed"]
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]

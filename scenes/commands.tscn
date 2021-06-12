@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/commands.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI_Items.png" type="Texture" id=2]
+
+[node name="commands" type="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 32, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Button" parent="."]
+self_modulate = Color( 0, 0, 0, 0 )
+margin_right = 32.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite" parent="move"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 16 )
+
+[node name="mine" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 24.0
+margin_right = 32.0
+margin_bottom = 44.0
+
+[node name="Sprite" type="Sprite" parent="mine"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 32, 16, 32, 16 )
+
+[node name="fight" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 48.0
+margin_right = 32.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="fight"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 16 )
+
+[node name="defend" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 92.0
+
+[node name="Sprite" type="Sprite" parent="defend"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 16, 32, 16 )
