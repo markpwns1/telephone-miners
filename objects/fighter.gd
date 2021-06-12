@@ -1,7 +1,8 @@
 extends Area2D
 
-enum State {Idle, Moving, Fighting, Defending}
+enum State {Idle, Moving, Fighting, Defending, Disconnected}
 
+var connected = true
 var receiver: String = ""
 var fstate: int = State.Idle
 var mouse_on: bool = false
@@ -21,11 +22,11 @@ func _on_receive(_receiver: String):
 		fstate = State.Fighting
 	elif command == "defend":
 		fstate = State.Defending
-
+	elif command == "check":
+		connected = true
 
 func _on_fighter_mouse_entered():
 	mouse_on = true
-
 
 func _on_fighter_mouse_exited():
 	mouse_on = false

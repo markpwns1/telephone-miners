@@ -3,7 +3,6 @@ extends Node2D
 enum Option {NONE, MOVING_TO}
 
 var selecting_state = Option.NONE
-
 var selection: Node
 
 func _unhandled_input(event):
@@ -11,7 +10,7 @@ func _unhandled_input(event):
 		if selecting_state == Option.NONE:
 			var selected = false
 			for child in get_children():
-				if child.get("mouse_on"):
+				if child.get("mouse_on") and child.get("connected"):
 					selected = true
 					selection = child
 					$commands.set_position(get_global_mouse_position())

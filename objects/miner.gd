@@ -1,7 +1,8 @@
 extends Area2D
 
-enum State {Idle, Moving, Mining}
+enum State {Idle, Moving, Mining, Disconnected}
 
+var connected = true
 var receiver: String = ""
 var mstate: int = State.Idle
 var mouse_on: bool = false
@@ -19,6 +20,8 @@ func _on_receive(_receiver: String):
 		mstate = State.Moving
 	elif command == "mine":
 		mstate = State.Mining
+	elif command == "check":
+		connected = true
 
 func _on_miner_mouse_entered():
 	mouse_on = true
