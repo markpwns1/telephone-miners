@@ -5,9 +5,7 @@ func select(unit: Node):
 	$move.show()
 	$mine.show()
 	$fight.show()
-	$defend.show()
 	if unit.get("fstate") != null:
 		$mine.hide()
 	elif unit.get("mstate") != null:
 		$fight.hide()
-		$defend.hide()

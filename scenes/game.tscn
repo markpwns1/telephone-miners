@@ -172,7 +172,6 @@ position = Vector2( 903.363, 653.899 )
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]
-[connection signal="pressed" from="commands/defend" to="." method="_on_defend_pressed"]
 [connection signal="pressed" from="spawning/fighter" to="." method="_on_fighter_pressed"]
 [connection signal="pressed" from="spawning/miner" to="." method="_on_miner_pressed"]
 [connection signal="pressed" from="spawning/pylon" to="." method="_on_pylon_pressed"]

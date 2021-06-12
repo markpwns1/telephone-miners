@@ -58,16 +58,3 @@ texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 16 )
-
-[node name="defend" type="Button" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_top = 72.0
-margin_right = 32.0
-margin_bottom = 92.0
-
-[node name="Sprite" type="Sprite" parent="defend"]
-z_index = 2
-texture = ExtResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 16, 32, 16 )
