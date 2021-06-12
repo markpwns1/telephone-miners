@@ -9,17 +9,18 @@ var enemy_list
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	enemy_list = []
-	target_pos = position
-	get_owner().get_node("global_timer").connect("beat", self, "_on_global_timer_beat")
-	self.connect("die", get_owner().get_node("sfx_controller"), "_on_die")
-	self.connect("fight", get_owner().get_node("sfx_controller"), "_on_fight")
+	
+	get_node("../global_timer").connect("beat", self, "_on_global_timer_beat")
+	self.connect("die", get_node("../sfx_controller"), "_on_die")
+	self.connect("fight", get_node("../sfx_controller"), "_on_fight")
 
 
 func _update():
-	is_moving = true
 	if enemy_list.empty():
+		move_towards_target()
 		return
 	
+	is_moving = true
 	var target = find_closest_enemy()
 	target_pos = target.position
 	move_towards_target()
