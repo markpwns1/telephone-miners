@@ -148,7 +148,6 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -162,6 +161,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -169,7 +169,6 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -184,9 +183,8 @@ position = Vector2( 903.363, 653.899 )
 
 [node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
-
-[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
+[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]

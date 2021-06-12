@@ -50,8 +50,6 @@ func find_closest_enemy():
 
 
 func _on_detection_range_area_entered(area: Area2D):
-	print(area.name)
-	print(area.get_groups())
 	if area.is_in_group("robots"):
 		enemy_list.append(area)
 

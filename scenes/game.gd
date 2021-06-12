@@ -58,13 +58,20 @@ func _unhandled_input(event):
 						selecting_state = Option.NONE
 						currency -= 1
 						emit_signal("spawn_unit")
-						print("signal sent")
+					else:
+						$pylon_selection_icon.visible = false
+						$grid_selection_icon.visible = true
+						$selection_icon.visible = false
+						$move_selection_icon.visible = false
+						$spawning.hide()
 						
 			if not selected:
 				selection = null
 				$commands.hide()
 				if currency > 0 and not available_pylon.empty():
-					connectable_pylon = available_pylon
+					connectable_pylon = []
+					for x in available_pylon:
+						connectable_pylon.append(x)
 					$spawning.set_position(get_global_mouse_position())
 					$spawning.visible = !$spawning.visible
 					spawning_position = $move_selection_icon.position
@@ -76,8 +83,10 @@ func _unhandled_input(event):
 				selecting_state = Option.NONE
 		else:
 			selecting_state = Option.NONE
-			$move_selection_icon.visible = false
+			$pylon_selection_icon.visible = false
 			$grid_selection_icon.visible = true
+			$selection_icon.visible = false
+			$move_selection_icon.visible = false
 			if stealth:
 				selection.receiver = "smove " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
 			else:
