@@ -6,6 +6,7 @@ var connected = true
 var receiver: String = ""
 var fstate: int = State.Idle
 var mouse_on: bool = false
+var defense_spot: Vector2
 
 var enemy_fight_detected
 var enemy_defend_detected
@@ -17,6 +18,7 @@ func _ready():
 	enemy_list = []
 	enemy_fight_detected = []
 	enemy_defend_detected = []
+	defense_spot = position
 	
 func _process(delta):
 	if receiver != "":
@@ -34,6 +36,7 @@ func _on_receive(_receiver: String):
 		fstate = State.Fighting
 	elif command == "defend":
 		fstate = State.Defending
+		defense_spot = position
 	elif command == "beat":
 		connected = true
 		if fstate == State.Moving:
@@ -42,6 +45,8 @@ func _on_receive(_receiver: String):
 			is_moving = true
 			var target = find_closest_enemy()
 			if enemy_list.empty():
+				if fstate == State.Defending:
+					target_pos = defense_spot
 				return
 			target_pos = target.position
 			move_towards_target()
