@@ -146,7 +146,6 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -154,7 +153,6 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -162,7 +160,6 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -175,7 +172,7 @@ position = Vector2( 903.363, 653.899 )
 
 [node name="cursor_range" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cursor_range"]
+[node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
 
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
@@ -186,5 +183,7 @@ shape = SubResource( 10 )
 [connection signal="pressed" from="spawning/fighter" to="." method="_on_fighter_pressed"]
 [connection signal="pressed" from="spawning/miner" to="." method="_on_miner_pressed"]
 [connection signal="pressed" from="spawning/pylon" to="." method="_on_pylon_pressed"]
+[connection signal="area_entered" from="cursor_range" to="." method="_on_cursor_range_area_entered"]
+[connection signal="area_exited" from="cursor_range" to="." method="_on_cursor_range_area_exited"]
 
 [editable path="commands"]

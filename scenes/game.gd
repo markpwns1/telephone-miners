@@ -12,6 +12,9 @@ var selecting_state = Option.NONE
 var selection: Node
 var stealth = false
 
+var available_pylon
+var connectable_pylon
+
 var spawning_position: Vector2
 
 export var currency: int = 0
@@ -19,9 +22,12 @@ export var currency: int = 0
 signal spawn_unit
 func _ready():
 	self.connect("spawn_unit", get_node("sfx_controller"), "_on_unit_spawn")
+	available_pylon = []
+	connectable_pylon = []
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.is_pressed():
+		$cursor_range.position = get_global_mouse_position()
 		$move_selection_icon.position = Vector2(6, 6) + (get_global_mouse_position() / 12).floor() * 12
 		if selecting_state == Option.NONE or selecting_state == Option.SPAWNING:
 			var selected = false
@@ -37,7 +43,7 @@ func _unhandled_input(event):
 						$spawning.hide()
 						if Input.is_action_pressed("control_stealth"):
 							stealth = true
-					elif child.get("transmitting") != null:
+					elif child in connectable_pylon:
 						selected = true
 						add_child(selection)
 						child.transmitting.append(selection.get_path())
@@ -51,7 +57,8 @@ func _unhandled_input(event):
 			if not selected:
 				selection = null
 				$commands.hide()
-				if currency > 0:
+				if currency > 0 and not available_pylon.empty():
+					connectable_pylon = available_pylon
 					$spawning.set_position(get_global_mouse_position())
 					$spawning.visible = !$spawning.visible
 					spawning_position = $move_selection_icon.position
@@ -125,3 +132,13 @@ func configure_spawn_ui():
 func _on_global_timer_beat():
 	get_node("rts_camera/camera/currency").text = String(currency)
 	update()
+
+func _on_cursor_range_area_entered(area):
+	if area.get("transmitting") != null:
+		available_pylon.append(area)
+
+func _on_cursor_range_area_exited(area):
+	if area == null:
+		return
+	if area in available_pylon:
+		available_pylon.erase(area)
