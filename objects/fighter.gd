@@ -2,6 +2,10 @@ extends Pathfinder
 
 enum State { Moving, Fighting, Defending }
 
+export var moving_sprite: Texture
+export var defending_sprite: Texture
+export var attack_sprite: Texture
+
 var connected = true
 var receiver: String = ""
 var fstate: int = State.Defending
@@ -12,6 +16,9 @@ var enemy_fight_detected
 var enemy_defend_detected
 var enemy_list
 
+signal fight
+signal die
+
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	target_pos = position
@@ -19,14 +26,24 @@ func _ready():
 	enemy_fight_detected = []
 	enemy_defend_detected = []
 	defense_spot = position
+	self.connect("die", get_node("../sfx_controller"), "_on_die")
+	self.connect("fight", get_node("../sfx_controller"), "_on_fight")
+
 	
 func _process(delta):
+	update()
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
 	if not is_moving and fstate == State.Moving:
 		fstate = State.Defending
 		defense_spot = position
+
+func _draw():
+	if mouse_on:
+		draw_line(position, target_pos, Color(0, 0, 0, 1), 2)
+	
+
 func _on_receive(_receiver: String):
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
@@ -40,7 +57,15 @@ func _on_receive(_receiver: String):
 		connected = true
 		if fstate == State.Moving:
 			move_towards_target()
+			if position.distance_to(target_pos) < 4:
+				$task_icon.texture = null
+			else:
+				$task_icon.texture = moving_sprite
 		elif fstate == State.Fighting or fstate == State.Defending:
+			if(fstate == State.Fighting):
+				$task_icon.texture = attack_sprite
+			else:
+				$task_icon.texture = defending_sprite
 			is_moving = true
 			var target = find_closest_enemy()
 			if enemy_list.empty():

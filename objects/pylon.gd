@@ -3,6 +3,7 @@ extends Pathfinder
 enum State { Idle, Moving }
 
 export var transmitting = []
+export var moving_sprite: Texture
 
 var connected = true
 var receiver: String = ""
@@ -53,6 +54,10 @@ func _on_receive(_receiver: String):
 		if command == "beat":
 			connected = true
 			move_towards_target()
+			if position.distance_to(target_pos) < 4:
+				$task_icon.texture = null
+			else:
+				$task_icon.texture = moving_sprite
 
 func _on_pylon_mouse_entered():
 	mouse_on = true

@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/pylon_idle.png" type="Texture" id=1]
 [ext_resource path="res://objects/pylon.gd" type="Script" id=2]
+[ext_resource path="res://assets/move task icon.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "pylon_idle"
-length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -15,7 +15,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.001, 0.25 ),
+"times": PoolRealArray( 0, 0.001, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 0, 1 ]
@@ -28,6 +28,7 @@ extents = Vector2( 6, 6 )
 "robots",
 ]]
 script = ExtResource( 2 )
+moving_sprite = ExtResource( 3 )
 
 [node name="pylon_sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -40,5 +41,8 @@ anims/pylon_idle = SubResource( 1 )
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
+[node name="task_icon" type="Sprite" parent="."]
+position = Vector2( 0, -10 )
+z_index = 1
 [connection signal="mouse_entered" from="." to="." method="_on_pylon_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_pylon_mouse_exited"]

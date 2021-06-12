@@ -28,3 +28,12 @@ func move_towards_target():
 	if path and path[1]:
 		var dist_to_next_node = position.distance_to(path[1].floor())
 		position += (path[1].floor() - position).normalized() * min(12, dist_to_next_node)
+
+
+func _process(_delta):
+	update()
+
+func _draw():
+	
+	if is_moving:
+		draw_line(target_pos, position, Color(0, 0, 0, 1), 2)

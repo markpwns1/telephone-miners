@@ -3,6 +3,8 @@ extends Pathfinder
 signal die
 signal fight
 
+export var alert_sprite: Texture
+
 var enemy_list
 
 # Called when the node enters the scene tree for the first time.
@@ -18,8 +20,10 @@ func _ready():
 func _update():
 	if enemy_list.empty():
 		move_towards_target()
+		$alert_icon.texture = null
 		return
 	
+	$alert_icon.texture = alert_sprite
 	is_moving = true
 	var target = find_closest_enemy()
 	target_pos = target.position
@@ -46,6 +50,8 @@ func find_closest_enemy():
 
 
 func _on_detection_range_area_entered(area: Area2D):
+	print(area.name)
+	print(area.get_groups())
 	if area.is_in_group("robots"):
 		enemy_list.append(area)
 

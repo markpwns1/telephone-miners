@@ -1,6 +1,8 @@
 extends Pathfinder
 
 export var mine_radius = 12*12
+export var mining_sprite: Texture
+export var moving_sprite: Texture
 
 enum State { Idle, Moving, Mining }
 
@@ -63,7 +65,11 @@ func _on_receive(_receiver: String):
 
 		if mstate == State.Moving:
 			move_towards_target()
+			$task_icon.texture = moving_sprite
+			if position.distance_to(target_pos) < 4:
+				$task_icon.texture = null
 		elif mstate == State.Mining:
+			$task_icon.texture = mining_sprite
 			if currently_mining:
 				currently_mining.resources_left -= 1
 				get_tree().root.get_child(0).currency += 1
@@ -103,6 +109,8 @@ func _on_receive(_receiver: String):
 						desired_ore = ore
 						ore.in_use_by = self
 						break
+		
+		
 				
 
 
