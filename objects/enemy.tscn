@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/human enemy.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemy.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "fighter idle"
 length = 0.5
 loop = true
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 120, 120 )
 
 [node name="enemy" type="Area2D"]
@@ -34,9 +34,12 @@ frame = 1
 
 [node name="anim_plr2" type="AnimationPlayer" parent="."]
 autoplay = "fighter idle"
-"anims/fighter idle" = SubResource( 2 )
+"anims/fighter idle" = SubResource( 1 )
 
-[node name="collider" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="collider" type="CollisionShape2D" parent="." groups=[
+"enemies",
+]]
+shape = SubResource( 2 )
+
 [connection signal="area_entered" from="." to="." method="_on_fighter_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_fighter_area_exited"]
