@@ -31,7 +31,6 @@ func _ready():
 
 	
 func _process(delta):
-	update()
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
@@ -41,10 +40,15 @@ func _process(delta):
 
 func _draw():
 	if mouse_on:
-		draw_line(position, target_pos, Color(0, 0, 0, 1), 2)
+		var point = target_pos - position
+		var dir = point.normalized()
+		draw_line(dir * 8, point, Color(0, 0, 0, .5), 1)
+		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
+		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
 	
 
 func _on_receive(_receiver: String):
+	update()
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":

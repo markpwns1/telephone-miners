@@ -26,7 +26,6 @@ func _process(_dt):
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
-	update()
 
 func sort_by_distance(a, b):
 	return is_instance_valid(a) and is_instance_valid(b) and (position.distance_squared_to(a.position) < position.distance_squared_to(b.position))
@@ -34,6 +33,13 @@ func sort_by_distance(a, b):
 # WHY TF ISNT THIS WORKING!!!!
 # it's supposed to draw the miner's path
 func _draw():
+	# draws dark line if mouse hover
+	if mouse_on:
+		var point = target_pos - position
+		var dir = point.normalized()
+		draw_line(dir * 8, point, Color(0, 0, 0, .5), 1)
+		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
+		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
 	draw_circle(position, 20, Color.blue) # testing, remove this after
 	var p = position
 	for pos in path:
@@ -41,6 +47,7 @@ func _draw():
 		p = pos
 
 func _on_receive(_receiver: String):
+	update()
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":

@@ -13,6 +13,7 @@ func resolve_path():
 		path = nav.get_simple_path(position, target_pos)
 
 func move_towards_target():
+	update()
 	if not is_moving:
 		return
 
@@ -30,10 +31,10 @@ func move_towards_target():
 		position += (path[1].floor() - position).normalized() * min(12, dist_to_next_node)
 
 
-func _process(_delta):
-	update()
-
 func _draw():
-	
 	if is_moving:
-		draw_line(target_pos, position, Color(0, 0, 0, 1), 2)
+		var point = target_pos - position
+		var dir = point.normalized()
+		draw_line(dir * 8, point, Color(0, 0, 0, .2), 1)
+		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .2), 1.5)
+		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .2), 1.5)
