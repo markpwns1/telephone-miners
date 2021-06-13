@@ -74,6 +74,7 @@ script = ExtResource( 7 )
 fighter_prefab = ExtResource( 5 )
 miner_prefab = ExtResource( 1 )
 pylon_prefab = ExtResource( 3 )
+unit_spawn_sound_time_window = 150.0
 
 [node name="global_timer" parent="." instance=ExtResource( 9 )]
 
@@ -147,6 +148,7 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -160,7 +162,6 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -168,6 +169,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -179,7 +181,6 @@ script = ExtResource( 13 )
 
 [node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
-
 [connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]

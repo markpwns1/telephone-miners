@@ -22,7 +22,7 @@ func _ready():
 
 
 func _process(delta):
-	if(type > 1):
+	if(type >= 1):
 		if((type & Sound.Fight) != 0):
 			fx_player.stream = fight_clip
 		elif((type & Sound.Die) != 0):

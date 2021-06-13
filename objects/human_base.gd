@@ -13,7 +13,7 @@ signal human_spawn
 
 func _ready():
 	get_node("../../../../global_timer").connect("beat", self, "_on_beat")
-	self.connect("human_spawn", get_node("../sfx_controller"), "_on_enemy_spawn")
+	self.connect("human_spawn", get_node("../../../../sfx_controller"), "_on_enemy_spawn")
 	instances = []
 
 

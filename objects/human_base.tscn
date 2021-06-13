@@ -26,14 +26,13 @@ animations = [ {
 "enemies",
 ]]
 script = ExtResource( 2 )
-max_count = 3
-spawn_time = 10
+max_count = 6
+spawn_time = 8
 roam_dist = 60.0
 human_prefab = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

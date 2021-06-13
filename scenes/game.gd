@@ -16,8 +16,10 @@ var available_pylon
 var connectable_pylon
 
 var spawning_position: Vector2
+var spawn_time: float
 
 export var currency: int = 0
+export var unit_spawn_sound_time_window: float
 
 signal spawn_unit
 func _ready():
@@ -29,6 +31,7 @@ func _ready():
 
 func _process(delta):
 	$cursor_range.position = get_global_mouse_position()
+	update()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT or event.button_index == BUTTON_MIDDLE):
@@ -67,7 +70,7 @@ func _unhandled_input(event):
 						$selection_icon.visible = false
 						selecting_state = Option.NONE
 						currency -= 1
-						emit_signal("spawn_unit")
+						spawn_time = OS.get_ticks_msec()
 					else:
 						$pylon_selection_icon.visible = false
 						$grid_selection_icon.visible = true
@@ -172,7 +175,8 @@ func configure_spawn_ui():
 
 func _on_global_timer_beat():
 	get_node("rts_camera/camera/currency").text = String(currency)
-	update()
+	if OS.get_ticks_msec() - spawn_time < unit_spawn_sound_time_window:
+		emit_signal("spawn_unit")
 
 func _on_cursor_range_area_entered(area):
 	if area.get("transmitting") != null:
