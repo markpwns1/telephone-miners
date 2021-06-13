@@ -35,3 +35,5 @@ stream = ExtResource( 6 )
 autoplay = true
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
+
+[node name="sfx_hat" type="AudioStreamPlayer" parent="."]

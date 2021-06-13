@@ -20,6 +20,7 @@ export var spawnH_cymb: AudioStream
 
 var backing_track: AudioStreamPlayer
 var fx_player: AudioStreamPlayer
+var fx_hat: AudioStreamPlayer
 
 var type: int = Sound.None
 var prev_type: int = Sound.None
@@ -28,6 +29,7 @@ var prev_type: int = Sound.None
 func _ready():
 	backing_track = $backing
 	fx_player = $sfx
+	fx_hat = $sfx_hat
 	get_owner().get_node("global_timer").connect("beat", self, "_on_global_timer_beat")
 
 func _on_global_timer_beat():
@@ -49,14 +51,17 @@ func _process(delta):
 
 func play_sound(t: int, main: AudioStream, cymb: AudioStream):
 	if (type & t) != 0:
-		if (prev_type & t) != 0:
-			fx_player.stream = cymb
-			prev_type = 0
-		else:
-			fx_player.stream = main
-			prev_type = type
+		fx_hat.stream = cymb
+		fx_hat.play()
+		var p = prev_type
+		prev_type = type
 
-		fx_player.play()
+		if (p & t) != t:
+			fx_player.stream = main
+			fx_player.play()
+		else:
+			prev_type = 0
+
 		backing_track.volume_db = -80
 		type = 0
 		return true

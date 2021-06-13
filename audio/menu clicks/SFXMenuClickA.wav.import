@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SFXMenuClickA.wav-f5462c47b14bcf4314358adef578dce7.sample"
+
+[deps]
+
+source_file="res://audio/menu clicks/SFXMenuClickA.wav"
+dest_files=[ "res://.import/SFXMenuClickA.wav-f5462c47b14bcf4314358adef578dce7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
