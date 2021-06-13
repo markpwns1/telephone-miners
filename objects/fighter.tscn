@@ -59,6 +59,7 @@ attack_sprite = ExtResource( 3 )
 [node name="fighter_sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 3
+frame = 2
 
 [node name="anim_plr" type="AnimationPlayer" parent="."]
 autoplay = "fighter idle"

@@ -22,6 +22,8 @@ func _ready():
 	target_pos = position
 	connect("mine", get_tree().root.get_child(0).get_node("sfx_controller"), "_on_mine")
 
+	$anim_plr.animation_set_next("mine", "miner idle")
+
 func _process(_dt):
 	update()
 	if receiver != "":
@@ -79,6 +81,7 @@ func _on_receive(_receiver: String):
 				currently_mining.resources_left -= 1
 				get_tree().root.get_child(0).currency += 1
 				emit_signal("mine")
+				$anim_plr.play("mine")
 				if currently_mining.resources_left <= 0:
 					to_mine.erase(currently_mining)
 					currently_mining.in_use_by = null

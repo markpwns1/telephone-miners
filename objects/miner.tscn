@@ -1,12 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/miner.gd" type="Script" id=1]
-[ext_resource path="res://assets/miner_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/miner sprites.png" type="Texture" id=2]
 [ext_resource path="res://assets/mine task icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/move task icon.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
-resource_name = "miner idle"
+resource_name = "mine"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("miner_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=2]
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -22,7 +38,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 6 )
 
 [node name="miner" type="Area2D" groups=[
@@ -35,14 +51,16 @@ moving_sprite = ExtResource( 4 )
 [node name="miner_sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 2
-frame = 1
+hframes = 2
+frame = 3
 
 [node name="anim_plr" type="AnimationPlayer" parent="."]
 autoplay = "miner idle"
-"anims/miner idle" = SubResource( 1 )
+anims/mine = SubResource( 1 )
+"anims/miner idle" = SubResource( 2 )
 
 [node name="collider" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="task_icon" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
