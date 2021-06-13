@@ -14,6 +14,8 @@ func _ready():
 	if target_pos.x == 0:
 		target_pos = position
 	
+	$anim_plr.animation_set_next("fight", "fighter idle")
+
 	get_node("../global_timer").connect("beat", self, "_on_global_timer_beat")
 	self.connect("die", get_node("../sfx_controller"), "_on_die")
 	self.connect("fight", get_node("../sfx_controller"), "_on_fight")
@@ -55,6 +57,7 @@ func _update():
 			emit_signal("die")
 		else:
 			emit_signal("fight")
+		$anim_plr.play("fight")
 
 
 func find_closest_enemy():
