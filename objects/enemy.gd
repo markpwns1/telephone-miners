@@ -11,10 +11,19 @@ var enemy_list
 func _ready():
 	nav = get_node("../world/nav") as Navigation2D
 	enemy_list = []
+	if target_pos.x == 0:
+		target_pos = position
 	
 	get_node("../global_timer").connect("beat", self, "_on_global_timer_beat")
 	self.connect("die", get_node("../sfx_controller"), "_on_die")
 	self.connect("fight", get_node("../sfx_controller"), "_on_fight")
+
+func _process(_d):
+	update()
+
+func _draw():
+	# show radius
+	draw_circle(Vector2.ZERO, get_node("detection_range/collider").shape.radius, Color(0.5, .1, .3, .08))
 
 
 func _update():
