@@ -27,9 +27,11 @@ func _ready():
 	$selection_icon.follow_mouse = false
 	$selection_icon.visible = false
 
+func _process(delta):
+	$cursor_range.position = get_global_mouse_position()
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.is_pressed():
-		$cursor_range.position = get_global_mouse_position()
 		$move_selection_icon.position = Vector2(6, 6) + (get_global_mouse_position() / 12).floor() * 12
 		if selecting_state == Option.NONE or selecting_state == Option.SPAWNING:
 			var selected = false
@@ -77,9 +79,12 @@ func _unhandled_input(event):
 					spawning_position = $move_selection_icon.position
 					$grid_selection_icon.visible = true
 					$pylon_selection_icon.visible = false
-					$selection_icon.visible = true
+					$selection_icon.visible = $spawning.visible
 					$selection_icon.position = spawning_position
 					$selection_icon.follow_node(null)
+				else:
+					$spawning.hide()
+					$selection_icon.hide()
 				selecting_state = Option.NONE
 		else:
 			selecting_state = Option.NONE
