@@ -1,7 +1,7 @@
 extends Node
 
 
-enum Sound{ None = 0, SpawnR = 1, SpawnH = 2, Mine = 4, Fight = 8, Die = 16}
+enum Sound{ None = 0, Mine = 1, SpawnH = 2, SpawnR = 4, Die = 8, Fight = 16}
 
 export var mine_clip: AudioStream
 export var die_clip: AudioStream
@@ -23,16 +23,16 @@ func _ready():
 
 func _process(delta):
 	if(type > 1):
-		if((type & Sound.Die) != 0):
-			fx_player.stream = die_clip
-		elif((type & Sound.Fight) != 0):
+		if((type & Sound.Fight) != 0):
 			fx_player.stream = fight_clip
-		elif((type & Sound.Mine) != 0):
-			fx_player.stream = mine_clip
-		elif((type & Sound.SpawnH) != 0):
-			fx_player.stream = spawnH_clip
+		elif((type & Sound.Die) != 0):
+			fx_player.stream = die_clip
 		elif((type & Sound.SpawnR) != 0):
 			fx_player.stream = spawnR_clip
+		elif((type & Sound.SpawnH) != 0):
+			fx_player.stream = spawnH_clip
+		elif((type & Sound.Mine) != 0):
+			fx_player.stream = mine_clip
 		
 		fx_player.play()
 		backing_track.volume_db = -80
