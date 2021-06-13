@@ -68,7 +68,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="no_money_msg" type="Label" parent="camera/message_container"]
+[node name="msg" type="Label" parent="camera/message_container"]
 visible = false
 modulate = Color( 0.27451, 0.27451, 0.27451, 1 )
 margin_left = 28.0

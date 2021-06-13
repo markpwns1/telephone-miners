@@ -23,6 +23,13 @@ onready var cam = get_viewport().get_camera() # get_tree().root.get_child(0).get
 
 const ISLAND_HEIGHT = 3
 
+const SIDE_TILE_START = 4
+const SIDE_TILE_COUNT = 3
+# const TOP_TILE_START
+
+func get_random_side_tile():
+	return rng.randi_range(SIDE_TILE_START, SIDE_TILE_START + SIDE_TILE_COUNT - 1)
+
 func get_position_with_difficulty_dist(s = 1.0):
 	var x = rng.randi_range(0, 128)
 	var y = rng.randi_range(0, 128)
@@ -47,7 +54,7 @@ func _ready():
 			var height = noise.get_noise_2dv(v) + 0.5 - dist * 2
 			if height > 0:
 				for i in range(ISLAND_HEIGHT):
-					set_cell(x, y - i, 2)
+					set_cell(x, y - i, get_random_side_tile())
 				set_cell(x, y - ISLAND_HEIGHT, 1)
 			else:
 				set_cell(x, y, 3)

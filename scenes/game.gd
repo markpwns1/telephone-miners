@@ -27,17 +27,14 @@ export var alt_select_sfx: AudioStream
 export var choose_pos_sfx: AudioStream
 var sfx: AudioStreamPlayer
 
-onready var message_container = get_node("rts_camera/camera/message_container")
-onready var no_currency_msg = message_container.get_node("no_money_msg")
+onready var message_label = get_node("rts_camera/camera/message_container/msg")
 
 var msg_timer = 0
-var current_msg: Control
 
-func show_message(msg):
-	msg_timer = 1
-	no_currency_msg.hide()
-	current_msg = msg
-	msg.show()
+func show_message(msg, time = 1):
+	msg_timer = time
+	message_label.text = msg
+	message_label.show()
 
 signal spawn_unit
 func _ready():
@@ -53,10 +50,9 @@ func _process(dt):
 
 	if msg_timer > 0:
 		msg_timer -= dt
-	elif current_msg:
-		current_msg.hide()
-		current_msg = null
-		
+	elif message_label.visible:
+		message_label.hide()
+
 	update()
 
 func _unhandled_input(event):
@@ -143,7 +139,7 @@ func _unhandled_input(event):
 					$spawning.hide()
 					$selection_icon.hide()
 					if currency <= 0:
-						show_message(no_currency_msg)
+						show_message("NO CRYSTALS.\nMINE CRYSTALS TO CREATE UNITS")
 				selecting_state = Option.NONE
 		elif event.button_index == BUTTON_LEFT:
 			# Left click while choosing a place to move to
