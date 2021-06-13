@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name HumanBase
+class_name HumanBass
 
 export var max_count: int
 export var soft_cap: int

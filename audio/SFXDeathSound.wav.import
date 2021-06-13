@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SFXDeathSound.wav-1bf2617382e48adff1dd8bc89262376d.sample"
+
+[deps]
+
+source_file="res://audio/SFXDeathSound.wav"
+dest_files=[ "res://.import/SFXDeathSound.wav-1bf2617382e48adff1dd8bc89262376d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

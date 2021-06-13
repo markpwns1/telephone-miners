@@ -36,6 +36,5 @@ text = "quit"
 [node name="pylon" parent="." instance=ExtResource( 1 )]
 position = Vector2( 150, 150 )
 scale = Vector2( 10, 10 )
-
 [connection signal="pressed" from="container/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="container/quit" to="." method="_on_quit_pressed"]

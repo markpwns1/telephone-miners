@@ -64,7 +64,7 @@ func _ready():
 	while i < spawner_count:
 		var pos = get_position_with_difficulty_dist()
 		var inst = enemy_spawner.instance()
-		(inst as HumanBase).max_count = pos.y / 16
+		inst.max_count = pos.y / 16
 		inst.position = pos * 12 + Vector2(6, 6)
 		add_child(inst)
 		i += 1
@@ -81,7 +81,7 @@ func _ready():
 	controller.position = pos
 	pylon.position = Vector2(controller.position.x, controller.position.y - 24)
 	miner.position = Vector2(pylon.position.x, pylon.position.y - 12)
-	cam.position = controller.position
+	cam.global_position = controller.position
 	cam.reset_smoothing()
 	cam.smoothing_enabled = true
 	
