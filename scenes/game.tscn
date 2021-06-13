@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://objects/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/controller.tscn" type="PackedScene" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://objects/Star Background.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/lock_position_to_grid.gd" type="Script" id=13]
 [ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
-[ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
 [ext_resource path="res://assets/movement selection icon.png" type="Texture" id=18]
 [ext_resource path="res://assets/selection.png" type="Texture" id=19]
@@ -176,9 +175,6 @@ script = ExtResource( 13 )
 [node name="sfx_controller" parent="." instance=ExtResource( 10 )]
 
 [node name="Star Background" parent="." instance=ExtResource( 12 )]
-
-[node name="enemy" parent="." instance=ExtResource( 15 )]
-position = Vector2( 903.363, 653.899 )
 
 [node name="cursor_range" type="Area2D" parent="."]
 
