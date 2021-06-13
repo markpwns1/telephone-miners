@@ -55,9 +55,15 @@ func _on_receive(_receiver: String):
 		is_moving = true
 		to_mine = [ ]
 
+		if desired_ore:
+			desired_ore.in_use_by = null
+
 		if currently_mining:
 			currently_mining.in_use_by = null
+
 		currently_mining = null
+		desired_ore = null
+		
 		mstate = State.Moving
 	elif command == "mine":
 

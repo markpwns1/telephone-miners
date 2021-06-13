@@ -52,6 +52,10 @@ func _update():
 	move_towards_target()
 	if position.distance_to(target.position) < 12:
 		enemy_list.erase(target)
+		if "currently_mining" in target and target.currently_mining:
+			target.currently_mining.in_use_by = null
+		if "desired_ore" in target and target.desired_ore:
+			target.desired_ore.in_use_by = null
 		target.queue_free()
 		if rand_range(0, 1.0) > 0.1:
 			emit_signal("die")
