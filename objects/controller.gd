@@ -123,3 +123,6 @@ func cull_null_transmitees():
 			to_remove.append(x)
 	for x in to_remove:
 		transmitting.erase(x)
+
+func _exit_tree():
+	get_parent().show_game_over_message("Game Over")

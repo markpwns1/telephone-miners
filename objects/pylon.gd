@@ -91,7 +91,7 @@ func _on_receive(_receiver: String):
 					var unit = get_node(transmittee)
 					if position.distance_to(unit.target_pos) > 120:
 						var move_to = position + (position.direction_to(unit.target_pos) * 10).floor() * 12
-						unit.out_of_range = position.distance_to(unit.target_pos) > 125
+						unit.out_of_range = position.distance_to(unit.target_pos) > 130
 						unit.target_pos = move_to
 						unit.is_moving = true
 						if unit.get("mstate") != null:
