@@ -81,7 +81,7 @@ func _ready():
 	controller.position = pos
 	pylon.position = Vector2(controller.position.x, controller.position.y - 24)
 	miner.position = Vector2(pylon.position.x, pylon.position.y - 12)
-	cam.position = controller.position
+	cam.global_position = controller.position
 	cam.reset_smoothing()
 	cam.smoothing_enabled = true
 	
