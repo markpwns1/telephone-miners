@@ -45,6 +45,16 @@ func _draw():
 		draw_line(dir * 8, point, Color(0, 0, 0, .5), 1)
 		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
 		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
+
+		var def_a = .2
+		var att_a = .05
+		if(fstate == State.Fighting):
+			def_a = .05
+			att_a = .15
+		# show defense radius
+		draw_circle(Vector2.ZERO, get_node("fighter_defend_range/collider").shape.radius, Color(0.1, .3, .5, def_a))
+		# show attack radius
+		draw_circle(Vector2.ZERO, get_node("fighter_fight_range/collider").shape.radius, Color(0.1, .3, .5, att_a))
 	
 
 func _on_receive(_receiver: String):
