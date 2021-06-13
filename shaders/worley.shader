@@ -4,6 +4,7 @@ shader_type canvas_item;
 uniform float scale = 1;
 uniform float worley_strength = .2f;
 uniform float worley_min = .8f;
+uniform float effect_strength = .35f;
 
 varying vec2 vert;
 
@@ -52,6 +53,10 @@ void fragment(){
     float worley = worley(vert * (scale / 3.0), 1.2, 1.2);
     worley = 1f - worley;
     worley = min(worley, worley_min);
-    COLOR.xyz = (COLOR.xyz * (1f - worley_strength)) + (COLOR.xyz * worley * worley_strength);
-    COLOR.xyz = floor(COLOR.xyz * 8f) / 8f;
+	
+	vec3 col = vec3(COLOR.x, COLOR.y, COLOR.z);
+    col.xyz = (col.xyz * (1f - worley_strength)) + (col.xyz * worley * worley_strength);
+    col.xyz = floor(col.xyz * 8f) / 8f;
+	
+	COLOR.xyz = mix(COLOR.xyz, col, effect_strength);
 }

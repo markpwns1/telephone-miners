@@ -3,6 +3,7 @@ extends TileMap
 export var island_falloff = 20
 export var size_x = 128
 export var size_y = 128
+export var surface_material: Material
 
 export var ore_count = 20
 
@@ -51,3 +52,6 @@ func _ready():
 		i += 1
 
 		# print(inst.position)
+
+	if(surface_material):
+		tile_set.tile_set_material(1, surface_material)
