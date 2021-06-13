@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Game
 
-enum Option {NONE, MOVING_TO, SPAWNING}
+enum Option { NONE, MOVING_TO, SPAWNING }
 
 export var fighter_prefab: PackedScene
 export var miner_prefab: PackedScene
@@ -31,7 +31,7 @@ func _process(delta):
 	$cursor_range.position = get_global_mouse_position()
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton && event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed() and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT or event.button_index == BUTTON_MIDDLE):
 		$move_selection_icon.position = Vector2(6, 6) + (get_global_mouse_position() / 12).floor() * 12
 		if selecting_state == Option.NONE or selecting_state == Option.SPAWNING:
 			var selected = false
@@ -40,10 +40,18 @@ func _unhandled_input(event):
 					if selecting_state == Option.NONE:
 						selected = true
 						selection = child
-
-						var menu_offset = $commands.rect_pivot_offset
-						$commands.set_position(get_global_mouse_position() - menu_offset)
-						$commands.select(selection)
+						
+						if event.button_index == BUTTON_LEFT:
+							var menu_offset = $commands.rect_pivot_offset
+							$commands.set_position(get_global_mouse_position() - menu_offset)
+							$commands.select(selection)
+						elif event.button_index == BUTTON_RIGHT:
+							_on_move_pressed()
+						else:
+							if child.get("fstate") != null:
+								_on_fight_pressed()
+							elif child.get("mstate") != null:
+								_on_mine_pressed()
 						$spawning.hide()
 						
 						$selection_icon.visible = true
@@ -70,7 +78,7 @@ func _unhandled_input(event):
 			if not selected:
 				selection = null
 				$commands.hide()
-				if currency > 0 and not available_pylon.empty():
+				if currency > 0 and not available_pylon.empty() and event.button_index == BUTTON_LEFT:
 					connectable_pylon = []
 					for x in available_pylon:
 						connectable_pylon.append(x)
@@ -86,7 +94,7 @@ func _unhandled_input(event):
 					$spawning.hide()
 					$selection_icon.hide()
 				selecting_state = Option.NONE
-		else:
+		elif event.button_index == BUTTON_LEFT:
 			selecting_state = Option.NONE
 			$pylon_selection_icon.visible = false
 			$grid_selection_icon.visible = true
