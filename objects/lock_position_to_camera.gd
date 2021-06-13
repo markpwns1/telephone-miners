@@ -6,6 +6,7 @@ extends Control
 # var b = "text"
 
 export var corner_offset: Vector2
+onready var cam = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +18,6 @@ func _ready():
 #	pass
 
 func _process(_d):
-	var cam = get_parent()
 	var pos = cam.get_camera_screen_center()
 	pos -= cam.get_viewport_rect().size / 2.0
 	set_global_position(pos + corner_offset)

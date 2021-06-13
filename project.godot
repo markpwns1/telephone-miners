@@ -44,11 +44,15 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=768
-window/size/height=768
+window/size/width=576
+window/size/height=576
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 window/stretch/shrink=3.0
+
+[global]
+
+width=false
 
 [importer_defaults]
 
