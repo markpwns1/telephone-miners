@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SFXSpawnHiHat.wav-48c8995e0744a9af097ae5dbdd5dee2d.sample"
+
+[deps]
+
+source_file="res://audio/SFXSpawnHiHat.wav"
+dest_files=[ "res://.import/SFXSpawnHiHat.wav-48c8995e0744a9af097ae5dbdd5dee2d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

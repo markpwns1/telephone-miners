@@ -1,21 +1,30 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/sfx_controller.gd" type="Script" id=1]
-[ext_resource path="res://audio/SFXSpawnHuman.wav" type="AudioStream" id=2]
-[ext_resource path="res://audio/SfxDead.wav" type="AudioStream" id=3]
-[ext_resource path="res://audio/SfxFight.wav" type="AudioStream" id=4]
-[ext_resource path="res://audio/SfxMine.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/SFXFightHiHat.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/SFXMineHiHat.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/SFXMineSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/SFXSpawnHiHat.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/XMXStageHiHats.wav" type="AudioStream" id=6]
-[ext_resource path="res://audio/SFXSpawnRobot.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/SFXSpawnSoundHuman.wav" type="AudioStream" id=7]
 [ext_resource path="res://audio/XMXStageMain.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/SFXSpawnSoundRobot.wav" type="AudioStream" id=9]
+[ext_resource path="res://audio/SFXFightSound.wav" type="AudioStream" id=10]
+[ext_resource path="res://audio/SFXDeathSound.wav" type="AudioStream" id=11]
+[ext_resource path="res://audio/SFXDeathHiHat.wav" type="AudioStream" id=12]
 
 [node name="sfx_controller" type="Node2D"]
 script = ExtResource( 1 )
-mine_clip = ExtResource( 5 )
-die_clip = ExtResource( 3 )
-fight_clip = ExtResource( 4 )
-spawnR_clip = ExtResource( 7 )
-spawnH_clip = ExtResource( 2 )
+mine_clip = ExtResource( 4 )
+mine_cymb = ExtResource( 3 )
+die_clip = ExtResource( 11 )
+die_cymb = ExtResource( 12 )
+fight_clip = ExtResource( 10 )
+fight_cymb = ExtResource( 2 )
+spawnR_clip = ExtResource( 9 )
+spawnR_cymb = ExtResource( 5 )
+spawnH_clip = ExtResource( 7 )
+spawnH_cymb = ExtResource( 5 )
 
 [node name="Main Theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

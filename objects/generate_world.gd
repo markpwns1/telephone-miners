@@ -64,7 +64,7 @@ func _ready():
 	while i < spawner_count:
 		var pos = get_position_with_difficulty_dist()
 		var inst = enemy_spawner.instance()
-		(inst as HumanBase).max_count = pos.y / 16
+		inst.max_count = pos.y / 16
 		inst.position = pos * 12 + Vector2(6, 6)
 		add_child(inst)
 		i += 1
