@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://objects/lock_position_to_camera.gd" type="Script" id=1]
 [ext_resource path="res://objects/camera.gd" type="Script" id=2]
 
 [node name="rts_camera" type="Node2D"]
@@ -15,8 +16,10 @@ script = ExtResource( 2 )
 modulate = Color( 0.27451, 0.27451, 0.27451, 1 )
 margin_left = -128.0
 margin_top = -128.0
-margin_right = -88.0
-margin_bottom = -114.0
+margin_right = -74.0
+margin_bottom = -111.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+corner_offset = Vector2( 8, 8 )
