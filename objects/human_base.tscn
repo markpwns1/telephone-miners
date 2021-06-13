@@ -26,7 +26,8 @@ animations = [ {
 "enemies",
 ]]
 script = ExtResource( 2 )
-max_count = 6
+max_count = 12
+soft_cap = 6
 spawn_time = 8
 roam_dist = 60.0
 human_prefab = ExtResource( 1 )

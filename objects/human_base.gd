@@ -1,6 +1,7 @@
 extends Area2D
 
 export var max_count: int
+export var soft_cap: int
 export var spawn_time: int
 export var roam_dist: float
 
@@ -24,7 +25,10 @@ func _ready():
 
 func _on_beat():
 	spawn_timer += 1
-	if spawn_timer > spawn_time && instances.size() < max_count:
+
+	var spawn = spawn_timer > spawn_time && instances.size() < soft_cap
+	spawn = spawn || spawn_timer > spawn_time && instances.size() < max_count
+	if spawn:
 		var instance = human_prefab.instance()
 		instance.position = position + Vector2.DOWN * 8
 		instance.target_pos = position + Vector2(rand_range(-roam_dist, roam_dist), rand_range(-roam_dist, roam_dist))
