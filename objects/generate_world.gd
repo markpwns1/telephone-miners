@@ -55,9 +55,12 @@ func get_position_with_difficulty_dist(s = 1.0):
 
 	return Vector2(x, y)
 
+var seed_rng = RandomNumberGenerator.new()
+
 func _ready():
-	# var s = OS.get_unix_time()
-	var s = GOOD_SEEDS[rng.randi_range(0, GOOD_SEEDS.size() - 1)]
+
+	seed_rng.seed = OS.get_unix_time()
+	var s = GOOD_SEEDS[seed_rng.randi_range(0, GOOD_SEEDS.size() - 1)]
 	noise.seed = s
 	print("SEED: " + String(s))
 	noise.octaves = 4

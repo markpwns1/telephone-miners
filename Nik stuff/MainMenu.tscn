@@ -96,9 +96,9 @@ text = "Start"
 
 [node name="start_button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 12.0
+margin_left = 13.0
 margin_top = 5.0
-margin_right = 72.0
+margin_right = 73.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 60, 0 )
 
@@ -131,9 +131,9 @@ text = "Exit"
 
 [node name="exit_button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 18.0
+margin_left = 19.0
 margin_top = 5.0
-margin_right = 66.0
+margin_right = 67.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 48, 12 )
 
@@ -168,6 +168,7 @@ text = "Exit"
 [node name="sfx_click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -20.0
+
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/exit_button" to="." method="_on_exit_button_mouse_entered"]

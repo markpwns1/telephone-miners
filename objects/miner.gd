@@ -63,9 +63,18 @@ func _on_receive(_receiver: String):
 
 		currently_mining = null
 		desired_ore = null
-		
+
 		mstate = State.Moving
 	elif command == "mine" || command == "do":
+
+		if desired_ore:
+			desired_ore.in_use_by = null
+
+		if currently_mining:
+			currently_mining.in_use_by = null
+
+		currently_mining = null
+		desired_ore = null
 
 		var ores = get_tree().get_nodes_in_group("ore")
 		for ore in ores:
@@ -103,6 +112,8 @@ func _on_receive(_receiver: String):
 					desired_ore = null
 			elif to_mine.size() == 0:
 				mstate = State.Idle
+				$task_icon.texture = null
+				get_tree().root.get_child(0).show_message("NOTHING TO MINE NEARBY")
 			else:
 				for ore in to_mine:
 					if not is_instance_valid(ore) or not ore.position:
@@ -111,7 +122,8 @@ func _on_receive(_receiver: String):
 				to_mine.sort_custom(self, "sort_by_distance")
 
 				if to_mine.size() == 0:
-					mstate = State.Idle
+					# mstate = State.Idle
+					# get_tree().root.get_child(0).show_message("NOTHING TO MINE NEARBY")
 					return
 
 				for ore in to_mine:
