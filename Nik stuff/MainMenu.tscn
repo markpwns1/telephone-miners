@@ -1,16 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nik stuff/chircago.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Nik stuff/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shaders/stars.shader" type="Shader" id=4]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickC.wav" type="AudioStream" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/space_colour = Plane( 0, 0, 0, 1 )
+shader_param/star_colour = Plane( 1, 1, 1, 1 )
+shader_param/resolution = Vector2( 1028, 1028 )
+shader_param/front_noise_scale = 8.0
+shader_param/mid_noise_scale = 3.0
+shader_param/back_noise_scale = 1.5
+shader_param/front_parallax_mod = 0.5
+shader_param/mid_parallax_mod = 0.2
+shader_param/back_parallax_mod = 0.1
+shader_param/offset = null
 
 [node name="MainMenu" type="MarginContainer"]
-anchor_right = 1.052
-anchor_bottom = 1.052
-margin_right = 1.0
-margin_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+margin_right = 196.0
+margin_bottom = 192.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,60 +29,63 @@ __meta__ = {
 first_scene = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 606.0
-margin_bottom = 606.0
+material = SubResource( 1 )
+margin_right = 196.0
+margin_bottom = 192.0
 color = Color( 0.490196, 0.776471, 0.94902, 1 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_right = 606.0
-margin_bottom = 606.0
+margin_right = 196.0
+margin_bottom = 192.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 142.0
-margin_top = 227.0
-margin_right = 464.0
-margin_bottom = 378.0
+margin_left = 40.0
+margin_top = 3.0
+margin_right = 156.0
+margin_bottom = 189.0
 custom_constants/separation = 29
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
-margin_right = 322.0
-margin_bottom = 30.0
+margin_right = 116.0
+margin_bottom = 96.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
-margin_right = 322.0
-margin_bottom = 30.0
+margin_right = 116.0
+margin_bottom = 96.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Rhythmic Time Strategy"
+text = "Rythmic
+Time
+Strategy"
+align = 1
 
 [node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 59.0
-margin_right = 322.0
-margin_bottom = 151.0
+margin_top = 125.0
+margin_right = 116.0
+margin_bottom = 186.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2"]
-margin_left = 103.0
-margin_right = 219.0
-margin_bottom = 92.0
-custom_constants/separation = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 116.0
-margin_bottom = 30.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer"]
 margin_left = 15.0
 margin_right = 101.0
+margin_bottom = 61.0
+custom_constants/separation = 1
+
+[node name="Start" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_right = 86.0
 margin_bottom = 30.0
 
-[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start"]
+margin_right = 86.0
+margin_bottom = 30.0
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/HBoxContainer"]
 margin_right = 14.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
-[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/HBoxContainer"]
 margin_left = 18.0
 margin_right = 86.0
 margin_bottom = 30.0
@@ -80,17 +94,26 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Start"
 
-[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+[node name="start_button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 12.0
+margin_top = 5.0
+margin_right = 72.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 0 )
+
+[node name="Exit" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 31.0
-margin_right = 116.0
+margin_right = 86.0
 margin_bottom = 61.0
 rect_pivot_offset = Vector2( -111.59, 23.2934 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2"]
-margin_right = 116.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit"]
+margin_left = 8.0
+margin_right = 78.0
 margin_bottom = 30.0
 
-[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/HBoxContainer"]
 margin_right = 14.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 7, 0 )
@@ -98,37 +121,54 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
-[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/HBoxContainer"]
 margin_left = 18.0
-margin_right = 116.0
+margin_right = 70.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Options"
+text = "Exit"
+
+[node name="exit_button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 18.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 48, 12 )
 
 [node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 62.0
-margin_right = 116.0
-margin_bottom = 92.0
+visible = false
+margin_top = 56.0
+margin_right = 102.0
+margin_bottom = 83.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3"]
-margin_left = 23.0
-margin_right = 93.0
+margin_left = 16.0
+margin_right = 86.0
 margin_bottom = 30.0
 
 [node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer"]
-margin_right = 14.0
-margin_bottom = 30.0
+margin_right = 12.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 7, 0 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = ">"
 
 [node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/CenterContainer3/HBoxContainer"]
-margin_left = 18.0
-margin_right = 70.0
-margin_bottom = 30.0
+margin_left = 16.0
+margin_right = 62.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 45, 0 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Exit"
+
+[node name="sfx_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/exit_button" to="." method="_on_exit_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/exit_button" to="." method="_on_exit_button_pressed"]
