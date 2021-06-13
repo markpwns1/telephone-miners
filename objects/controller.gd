@@ -52,29 +52,29 @@ func _on_receive(_receiver: String):
 
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
-	if command == "move":
-		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		is_moving = true
-		pstate = State.Moving
-		var i = 1
-		var j = 1
-		var x = splitted_receiver[1].to_float()
-		var y = splitted_receiver[2].to_float()
-		for obj in transmitting:
-			if "pylon" in get_node(obj).name:
-				get_node(obj).receiver = "move " + String(x + 48 * j) + " " + splitted_receiver[2]
-				if j < 1:
-					i += 1
-				j += 1
-			else:
-				get_node(obj).receiver = "move " + String(x + 12 * (i % 4)) + " " + String(y + 12 * floor(i / 4))
-				i += 1
-	elif command == "smove":
-		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		is_moving = true
-		pstate = State.Moving
-	else:
-		for obj in transmitting:
+	# if command == "move":
+	# 	target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+	# 	is_moving = true
+	# 	pstate = State.Moving
+	# 	var i = 1
+	# 	var j = 1
+	# 	var x = splitted_receiver[1].to_float()
+	# 	var y = splitted_receiver[2].to_float()
+	# 	for obj in transmitting:
+	# 		if "pylon" in get_node(obj).name:
+	# 			get_node(obj).receiver = "move " + String(x + 48 * j) + " " + splitted_receiver[2]
+	# 			if j < 1:
+	# 				i += 1
+	# 			j += 1
+	# 		else:
+	# 			get_node(obj).receiver = "move " + String(x + 12 * (i % 4)) + " " + String(y + 12 * floor(i / 4))
+	# 			i += 1
+	# elif command == "smove":
+	# 	target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+	# 	is_moving = true
+	# 	pstate = State.Moving
+	# else:
+	for obj in transmitting:
 			get_node(obj).receiver = _receiver
 
 func check():
