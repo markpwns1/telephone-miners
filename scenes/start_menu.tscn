@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/pylon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/start_menu.gd" type="Script" id=2]
+
+[node name="start_menu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="container" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="container"]
+margin_right = 181.0
+margin_bottom = 14.0
+text = "RTS: Rhythmic Time Strategy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Button" parent="container"]
+margin_top = 18.0
+margin_right = 181.0
+margin_bottom = 38.0
+text = "start"
+
+[node name="quit" type="Button" parent="container"]
+margin_top = 42.0
+margin_right = 181.0
+margin_bottom = 62.0
+text = "quit"
+
+[node name="pylon" parent="." instance=ExtResource( 1 )]
+position = Vector2( 150, 150 )
+scale = Vector2( 10, 10 )
+
+[connection signal="pressed" from="container/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="container/quit" to="." method="_on_quit_pressed"]
