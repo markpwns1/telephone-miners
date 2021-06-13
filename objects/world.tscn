@@ -17,4 +17,4 @@ tile_data = PoolIntArray( 131095, 0, 0 )
 script = ExtResource( 2 )
 enemy_spawner = ExtResource( 4 )
 ore_count = 50
-spawner_count = 5
+spawner_count = 10

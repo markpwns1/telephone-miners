@@ -125,4 +125,4 @@ func cull_null_transmitees():
 		transmitting.erase(x)
 
 func _exit_tree():
-	get_parent().show_game_over_message("Game Over")
+	get_parent().show_game_over_message("GAME OVER\nTHE HUMANS HAVE EATEN YOUR COMPUTER\nTHERE IS NO HOPE")

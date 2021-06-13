@@ -25,6 +25,21 @@ const ISLAND_HEIGHT = 3
 
 const SIDE_TILE_START = 4
 const SIDE_TILE_COUNT = 3
+
+const GOOD_SEEDS = [ 
+	1623603429, 
+	1623603530, 
+	1623603581, 
+	1623603609,
+	1623603638, 1623603638, 1623603638,
+	1623603674,
+	1623603708, 1623603708,
+	1623603737, 1623603737, 1623603737, 1623603737,
+	1623603759, 1623603759, 1623603759,
+	1623603865, 1623603865, 1623603865,
+	1623603894, 1623603894, 1623603894
+]
+
 # const TOP_TILE_START
 
 func get_random_side_tile():
@@ -41,7 +56,8 @@ func get_position_with_difficulty_dist(s = 1.0):
 	return Vector2(x, y)
 
 func _ready():
-	var s = OS.get_unix_time()
+	# var s = OS.get_unix_time()
+	var s = GOOD_SEEDS[rng.randi_range(0, GOOD_SEEDS.size() - 1)]
 	noise.seed = s
 	print("SEED: " + String(s))
 	noise.octaves = 4
@@ -84,7 +100,7 @@ func _ready():
 		pos = Vector2(rng.randi_range(0, 128), rng.randi_range(128-32, 128))
 
 	pos *= 12
-	pos += Vector2(6, 6)
+	pos += Vector2(6, -18)
 	# pos.y = 128*12-pos.y
 	cam = get_current_camera2D()
 	print(cam)
