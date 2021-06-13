@@ -31,12 +31,15 @@ func _ready():
 
 	
 func _process(delta):
+	update()
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
 	if not is_moving and fstate == State.Moving:
 		fstate = State.Defending
 		defense_spot = position
+	
+	$anim_plr.animation_set_next("fight", "fighter idle")
 
 func _draw():
 	if mouse_on:
@@ -58,7 +61,6 @@ func _draw():
 	
 
 func _on_receive(_receiver: String):
-	update()
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
 	if command == "move":
@@ -96,6 +98,7 @@ func _on_receive(_receiver: String):
 					emit_signal("die")
 				else:
 					emit_signal("fight")
+				$anim_plr.play("fight")
 
 func find_closest_enemy():
 	if fstate == State.Fighting:

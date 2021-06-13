@@ -1,13 +1,29 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/fighter.gd" type="Script" id=1]
-[ext_resource path="res://assets/fighter_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/fighter_sprites.png" type="Texture" id=2]
 [ext_resource path="res://assets/fight task icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/defend task icon.png" type="Texture" id=4]
 [ext_resource path="res://assets/move task icon.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
-resource_name = "fighter idle"
+resource_name = "fight"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("fighter_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=2]
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -23,13 +39,13 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 48.0
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 120.0
 
 [node name="fighter" type="Area2D" groups=[
@@ -42,26 +58,26 @@ attack_sprite = ExtResource( 3 )
 
 [node name="fighter_sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-vframes = 2
-frame = 1
+vframes = 3
 
-[node name="anim_plr2" type="AnimationPlayer" parent="."]
+[node name="anim_plr" type="AnimationPlayer" parent="."]
 autoplay = "fighter idle"
-"anims/fighter idle" = SubResource( 1 )
+anims/fight = SubResource( 1 )
+"anims/fighter idle" = SubResource( 2 )
 
 [node name="collider" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="fighter_defend_range" type="Area2D" parent="."]
 
 [node name="collider" type="CollisionShape2D" parent="fighter_defend_range"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="fighter_fight_range" type="Area2D" parent="."]
 
 [node name="collider" type="CollisionShape2D" parent="fighter_fight_range"]
 position = Vector2( -0.33371, -1.00113 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="task_icon" type="Sprite" parent="."]
 position = Vector2( 0, -10 )

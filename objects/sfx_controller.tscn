@@ -5,9 +5,9 @@
 [ext_resource path="res://audio/SfxDead.wav" type="AudioStream" id=3]
 [ext_resource path="res://audio/SfxFight.wav" type="AudioStream" id=4]
 [ext_resource path="res://audio/SfxMine.wav" type="AudioStream" id=5]
-[ext_resource path="res://audio/XMXTestLoopSnareandHiHats.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/XMXStageHiHats.wav" type="AudioStream" id=6]
 [ext_resource path="res://audio/SFXSpawnRobot.wav" type="AudioStream" id=7]
-[ext_resource path="res://audio/XMXTestLoopBassAndKick.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/XMXStageMain.wav" type="AudioStream" id=8]
 
 [node name="sfx_controller" type="Node2D"]
 script = ExtResource( 1 )

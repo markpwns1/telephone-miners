@@ -108,22 +108,28 @@ func _draw():
 				draw_line(child.position + dir * 6, child.get_node(transmittee).position - dir * 6, Color(0, 0, 0, 0.5), 1)
 
 func _on_move_pressed():
-	if Input.is_action_pressed("control_stealth"):
-		stealth = true
-	selecting_state = Option.MOVING_TO
+	if is_instance_valid(selection):
+		if Input.is_action_pressed("control_stealth"):
+			stealth = true
+		selecting_state = Option.MOVING_TO
+	else:
+		selection = null
+		selecting_state = Option.NONE
 	$commands.hide()
 	$move_selection_icon.visible = true
 	$grid_selection_icon.visible = false
 
 func _on_mine_pressed():
-	selection.receiver = "mine"
+	if is_instance_valid(selection):
+		selection.receiver = "mine"
 	selection = null
 	$commands.hide()
 	$grid_selection_icon.visible = true
 	$selection_icon.visible = false
 
 func _on_fight_pressed():
-	selection.receiver = "fight"
+	if is_instance_valid(selection):
+		selection.receiver = "fight"
 	selection = null
 	$commands.hide()
 	$grid_selection_icon.visible = true
