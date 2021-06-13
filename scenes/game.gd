@@ -111,9 +111,9 @@ func _unhandled_input(event):
 					connectable_pylon = []
 					for x in available_pylon:
 						connectable_pylon.append(x)
-					$spawning.set_position(get_global_mouse_position())
-					$spawning.visible = !$spawning.visible
 					spawning_position = $move_selection_icon.position
+					$spawning.set_position(spawning_position)
+					$spawning.visible = !$spawning.visible
 					$grid_selection_icon.visible = true
 					$pylon_selection_icon.visible = false
 					$selection_icon.visible = $spawning.visible
