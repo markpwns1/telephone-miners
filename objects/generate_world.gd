@@ -16,13 +16,18 @@ var center = Vector2(0.5, 0.5)
 
 onready var ore = preload("res://objects/ore.tscn")
 
+onready var controller = get_node("../../../controller")
+onready var miner = get_node("../../../miner")
+onready var pylon = get_node("../../../pylon")
+onready var cam = get_tree().root.get_child(0).get_node("rts_camera/camera")
+
 const ISLAND_HEIGHT = 3
 
-func get_position_with_difficulty_dist():
+func get_position_with_difficulty_dist(s = 1.0):
 	var x = rng.randi_range(0, 128)
 	var y = rng.randi_range(0, 128)
 
-	while get_cell(x, y) != 1 or y > rng.randi_range(0, 128):
+	while get_cell(x, y) != 1 or y > rng.randi_range(0, 128.0 * s):
 		x = rng.randi_range(0, 128)
 		y = rng.randi_range(0, 128)
 
@@ -42,8 +47,10 @@ func _ready():
 			var height = noise.get_noise_2dv(v) + 0.5 - dist * 2
 			if height > 0:
 				for i in range(ISLAND_HEIGHT):
-					set_cell(x, y - 1, 2)
+					set_cell(x, y - i, 2)
 				set_cell(x, y - ISLAND_HEIGHT, 1)
+			else:
+				set_cell(x, y, 3)
 
 	var i = 0
 	while i < ore_count:
@@ -57,10 +64,27 @@ func _ready():
 	while i < spawner_count:
 		var pos = get_position_with_difficulty_dist()
 		var inst = enemy_spawner.instance()
+		(inst as HumanBase).max_count = pos.y / 16
 		inst.position = pos * 12 + Vector2(6, 6)
 		add_child(inst)
 		i += 1
 
+	var pos = Vector2(rng.randi_range(0, 128), rng.randi_range(128-32, 128))#get_position_with_difficulty_dist(1/8.0) * 12 + Vector2(6, 6)
+	
+	while get_cellv(pos) != 1:
+		pos = Vector2(rng.randi_range(0, 128), rng.randi_range(128-32, 128))
+
+	pos *= 12
+	pos += Vector2(6, 6)
+	# pos.y = 128*12-pos.y
+	cam.smoothing_enabled = false
+	controller.position = pos
+	pylon.position = Vector2(controller.position.x, controller.position.y - 24)
+	miner.position = Vector2(pylon.position.x, pylon.position.y - 12)
+	cam.position = controller.position
+	cam.reset_smoothing()
+	cam.smoothing_enabled = true
+	
 		# print(inst.position)
 
 	if(surface_material):

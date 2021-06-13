@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name HumanBase
+
 export var max_count: int
 export var soft_cap: int
 export var spawn_time: int

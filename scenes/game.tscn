@@ -92,9 +92,6 @@ transmitting = [ NodePath("../miner"), NodePath("../fighter") ]
 [node name="miner" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1002, 798 )
 
-[node name="fighter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1002.67, 822 )
-
 [node name="commands" parent="." instance=ExtResource( 6 )]
 
 [node name="rts_camera" parent="." instance=ExtResource( 4 )]

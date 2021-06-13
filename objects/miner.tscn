@@ -50,8 +50,8 @@ moving_sprite = ExtResource( 4 )
 
 [node name="miner_sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-vframes = 2
 hframes = 2
+vframes = 2
 frame = 3
 
 [node name="anim_plr" type="AnimationPlayer" parent="."]
@@ -65,5 +65,6 @@ shape = SubResource( 3 )
 [node name="task_icon" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 z_index = 1
+
 [connection signal="mouse_entered" from="." to="." method="_on_miner_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_miner_mouse_exited"]

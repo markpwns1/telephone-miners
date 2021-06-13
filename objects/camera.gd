@@ -10,7 +10,6 @@ var camera_bounds_x_px = camera_bounds_x * PIXELS_PER_TILE
 var camera_bounds_y_px = camera_bounds_y * PIXELS_PER_TILE
 
 func _process(dt):
-	var screen_size = get_viewport_rect().size / 2
 	var movement = camera_speed * dt
 
 	if Input.is_action_pressed("control_up"):# and position.y - screen_size.y - movement > 0:
