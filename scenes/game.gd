@@ -150,6 +150,8 @@ func _unhandled_input(event):
 					$selection_icon.hide()
 					if currency <= 0:
 						show_message("NO CRYSTALS.\nMINE CRYSTALS TO CREATE UNITS")
+					elif available_pylon.empty():
+						show_message("TOO FAR AWAY.\nYOU CAN ONLY CREATE UNITS NEAR PYLONS")
 				selecting_state = Option.NONE
 		elif event.button_index == BUTTON_LEFT:
 			# Left click while choosing a place to move to
