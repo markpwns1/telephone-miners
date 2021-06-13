@@ -61,6 +61,8 @@ __meta__ = {
 [node name="message_container" type="CenterContainer" parent="camera"]
 margin_right = 192.0
 margin_bottom = 192.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
