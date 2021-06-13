@@ -4,8 +4,10 @@ export var island_falloff = 20
 export var size_x = 128
 export var size_y = 128
 export var surface_material: Material
+export var enemy_spawner: PackedScene
 
 export var ore_count = 20
+export var spawner_count: int
 
 var rng = RandomNumberGenerator.new()
 var noise = OpenSimplexNoise.new()
@@ -47,6 +49,14 @@ func _ready():
 	while i < ore_count:
 		var pos = get_position_with_difficulty_dist()
 		var inst = ore.instance()
+		inst.position = pos * 12 + Vector2(6, 6)
+		add_child(inst)
+		i += 1
+
+	i = 0
+	while i < spawner_count:
+		var pos = get_position_with_difficulty_dist()
+		var inst = enemy_spawner.instance()
 		inst.position = pos * 12 + Vector2(6, 6)
 		add_child(inst)
 		i += 1

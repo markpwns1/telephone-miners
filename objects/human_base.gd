@@ -12,7 +12,7 @@ var instances
 signal human_spawn
 
 func _ready():
-	get_owner().get_node("global_timer").connect("beat", self, "_on_beat")
+	get_node("../../../../global_timer").connect("beat", self, "_on_beat")
 	self.connect("human_spawn", get_node("../sfx_controller"), "_on_enemy_spawn")
 	instances = []
 
@@ -29,7 +29,7 @@ func _on_beat():
 		instance.position = position + Vector2.DOWN * 8
 		instance.target_pos = position + Vector2(rand_range(-roam_dist, roam_dist), rand_range(-roam_dist, roam_dist))
 		instance.is_moving = true
-		get_owner().add_child(instance)
+		get_node("../../../..").add_child(instance)
 		instances.append(instance)
 		spawn_timer = 0
 		emit_signal("human_spawn")

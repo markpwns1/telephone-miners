@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/world_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/generate_world.gd" type="Script" id=2]
 [ext_resource path="res://shaders/moon.tres" type="Material" id=3]
+[ext_resource path="res://objects/human_base.tscn" type="PackedScene" id=4]
 
 [node name="world" type="Node2D"]
 
@@ -16,4 +17,6 @@ format = 1
 tile_data = PoolIntArray( 131095, 0, 0 )
 script = ExtResource( 2 )
 surface_material = ExtResource( 3 )
+enemy_spawner = ExtResource( 4 )
 ore_count = 50
+spawner_count = 5

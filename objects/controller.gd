@@ -16,9 +16,22 @@ func _ready():
 	target_pos = position
 
 func _process(delta):
+	update()
 	if receiver != "":
 		_on_receive(receiver)
 		receiver = ""
+
+func _draw():
+	if mouse_on:
+		#darken direction
+		var point = target_pos - position
+		var dir = point.normalized()
+		draw_line(dir * 8, point, Color(0, 0, 0, .5), 1)
+		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
+		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
+		# show radius
+		draw_circle(Vector2.ZERO, 120, Color(0.1, .3, .5, .15))
+
 
 func _on_receive(_receiver: String):
 	cull_null_transmitees()
