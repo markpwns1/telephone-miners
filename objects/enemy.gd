@@ -23,7 +23,18 @@ func _process(_d):
 
 func _draw():
 	# show radius
-	draw_circle(Vector2.ZERO, get_node("detection_range/collider").shape.radius, Color(0.5, .1, .3, .08))
+	var radius = get_node("detection_range/collider").shape.radius
+	var points = []
+	var rad = 0
+	while rad < 2 * PI:
+		points.append(Vector2(radius * cos(rad), radius * sin(rad)))
+		rad += PI / 16.0
+	
+	var point = points[-1]
+	for x in points:
+		draw_line(point, x, Color(0.5, .1, .3, .06), 1)
+		point = x
+	draw_circle(Vector2.ZERO, radius, Color(0.5, .1, .3, .03))
 
 
 func _update():
