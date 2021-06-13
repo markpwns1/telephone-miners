@@ -150,9 +150,9 @@ region_rect = Rect2( 0, 32, 32, 16 )
 
 [node name="pylon" type="Button" parent="spawning"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = -12.0
+margin_left = -13.0
 margin_top = -23.0
-margin_right = 14.0
+margin_right = 13.0
 margin_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -176,7 +176,6 @@ region_rect = Rect2( 32, 32, 32, 16 )
 [node name="grid_selection_icon" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 3 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -190,6 +189,7 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 6 )
+frame = 1
 playing = true
 script = ExtResource( 13 )
 
@@ -197,7 +197,6 @@ script = ExtResource( 13 )
 visible = false
 z_index = -1
 frames = SubResource( 9 )
-frame = 1
 playing = true
 script = ExtResource( 13 )
 
