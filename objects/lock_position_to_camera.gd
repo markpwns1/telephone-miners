@@ -1,4 +1,4 @@
-extends Label
+extends Control
 
 
 # Declare member variables here. Examples:

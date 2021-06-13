@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/lock_position_to_camera.gd" type="Script" id=1]
 [ext_resource path="res://objects/camera.gd" type="Script" id=2]
 [ext_resource path="res://assets/pixel.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/crystal.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 6
@@ -16,6 +17,17 @@ limit_left = -100000000
 limit_top = -100000000
 smoothing_enabled = true
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="camera"]
+margin_left = -92.1147
+margin_top = -115.952
+margin_right = -52.1147
+margin_bottom = -75.9516
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="currency" type="Label" parent="camera"]
 modulate = Color( 0.27451, 0.27451, 0.27451, 1 )
