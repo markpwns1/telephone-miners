@@ -45,12 +45,15 @@ func _unhandled_input(event):
 						selection = child
 						
 						if event.button_index == BUTTON_LEFT:
+							# Select an unit with left mouse -> command
 							var menu_offset = $commands.rect_pivot_offset
 							$commands.set_position(get_global_mouse_position() - menu_offset)
 							$commands.select(selection)
 						elif event.button_index == BUTTON_RIGHT:
+							# Select an unit with right mouse -> move
 							_on_move_pressed()
 						else:
+							# Select an unit with middle mouse
 							if child.get("fstate") != null:
 								_on_fight_pressed()
 							elif child.get("mstate") != null:
@@ -60,8 +63,10 @@ func _unhandled_input(event):
 						$selection_icon.visible = true
 						$selection_icon.follow_node(child)
 						if Input.is_action_pressed("control_stealth"):
+							# If shift key pressed
 							stealth = true
-					elif child in connectable_pylon:
+					elif child in connectable_pylon: # Selected unit need to be in connectable_pylon
+						# Connecting spawned unit to pylon
 						selected = true
 						add_child(selection)
 						child.transmitting.append(selection.get_path())
@@ -72,6 +77,7 @@ func _unhandled_input(event):
 						currency -= 1
 						spawn_time = OS.get_ticks_msec()
 					else:
+						# Canceling everything
 						$pylon_selection_icon.visible = false
 						$grid_selection_icon.visible = true
 						$selection_icon.visible = false
@@ -79,9 +85,11 @@ func _unhandled_input(event):
 						$spawning.hide()
 						
 			if not selected:
+				# Not click on any unit
 				selection = null
 				$commands.hide()
 				if currency > 0 and not available_pylon.empty() and event.button_index == BUTTON_LEFT:
+					# Spawning
 					connectable_pylon = []
 					for x in available_pylon:
 						connectable_pylon.append(x)
@@ -94,10 +102,12 @@ func _unhandled_input(event):
 					$selection_icon.position = spawning_position
 					$selection_icon.follow_node(null)
 				else:
+					# No spawning
 					$spawning.hide()
 					$selection_icon.hide()
 				selecting_state = Option.NONE
 		elif event.button_index == BUTTON_LEFT:
+			# Left click while choosing a place to move to
 			selecting_state = Option.NONE
 			$pylon_selection_icon.visible = false
 			$grid_selection_icon.visible = true
@@ -110,6 +120,7 @@ func _unhandled_input(event):
 			stealth = false
 			$selection_icon.visible = false
 		elif event.button_index == BUTTON_RIGHT:
+			# Right click to cancel moving state
 			selecting_state = Option.NONE
 			selection = null
 			$pylon_selection_icon.visible = false
