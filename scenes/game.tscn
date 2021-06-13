@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://objects/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/controller.tscn" type="PackedScene" id=2]
@@ -14,9 +14,13 @@
 [ext_resource path="res://objects/Star Background.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/lock_position_to_grid.gd" type="Script" id=13]
 [ext_resource path="res://assets/pylon selection icon.png" type="Texture" id=14]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickD.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/UI_Items.png" type="Texture" id=16]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickC.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/movement selection icon.png" type="Texture" id=18]
 [ext_resource path="res://assets/selection.png" type="Texture" id=19]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickB.wav" type="AudioStream" id=20]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickE.wav" type="AudioStream" id=21]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 11 )
@@ -75,6 +79,10 @@ fighter_prefab = ExtResource( 5 )
 miner_prefab = ExtResource( 1 )
 pylon_prefab = ExtResource( 3 )
 unit_spawn_sound_time_window = 150.0
+select_sfx = ExtResource( 15 )
+command_press_sfx = ExtResource( 20 )
+alt_select_sfx = ExtResource( 17 )
+choose_pos_sfx = ExtResource( 21 )
 
 [node name="global_timer" parent="." instance=ExtResource( 9 )]
 offset = 0.05
@@ -180,8 +188,9 @@ script = ExtResource( 13 )
 [node name="collider" type="CollisionShape2D" parent="cursor_range"]
 shape = SubResource( 10 )
 
-[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
+[node name="menu_sfx" type="AudioStreamPlayer" parent="."]
 [connection signal="beat" from="global_timer" to="." method="_on_global_timer_beat"]
+[connection signal="beat" from="global_timer" to="controller" method="_on_global_timer_beat"]
 [connection signal="pressed" from="commands/move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="commands/mine" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="commands/fight" to="." method="_on_fight_pressed"]

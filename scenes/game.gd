@@ -21,6 +21,12 @@ var spawn_time: float
 export var currency: int = 0
 export var unit_spawn_sound_time_window: float
 
+export var select_sfx: AudioStream
+export var command_press_sfx: AudioStream
+export var alt_select_sfx: AudioStream
+export var choose_pos_sfx: AudioStream
+var sfx: AudioStreamPlayer
+
 signal spawn_unit
 func _ready():
 	self.connect("spawn_unit", get_node("sfx_controller"), "_on_unit_spawn")
@@ -28,6 +34,7 @@ func _ready():
 	connectable_pylon = []
 	$selection_icon.follow_mouse = false
 	$selection_icon.visible = false
+	sfx = $menu_sfx
 
 func _process(delta):
 	$cursor_range.position = get_global_mouse_position()
@@ -49,19 +56,24 @@ func _unhandled_input(event):
 							var menu_offset = $commands.rect_pivot_offset
 							$commands.set_position(get_global_mouse_position() - menu_offset)
 							$commands.select(selection)
+							play_sound(select_sfx)
+							$selection_icon.visible = true
+							$selection_icon.follow_node(child)
 						elif event.button_index == BUTTON_RIGHT:
 							# Select an unit with right mouse -> move
 							_on_move_pressed()
+							play_sound(alt_select_sfx)
+							$selection_icon.visible = true
+							$selection_icon.follow_node(child)
 						else:
 							# Select an unit with middle mouse
 							if child.get("fstate") != null:
 								_on_fight_pressed()
 							elif child.get("mstate") != null:
 								_on_mine_pressed()
+							play_sound(alt_select_sfx)
 						$spawning.hide()
 						
-						$selection_icon.visible = true
-						$selection_icon.follow_node(child)
 						if Input.is_action_pressed("control_stealth"):
 							# If shift key pressed
 							stealth = true
@@ -119,6 +131,7 @@ func _unhandled_input(event):
 				selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
 			stealth = false
 			$selection_icon.visible = false
+			play_sound(choose_pos_sfx)
 		elif event.button_index == BUTTON_RIGHT:
 			# Right click to cancel moving state
 			selecting_state = Option.NONE
@@ -147,6 +160,7 @@ func _on_move_pressed():
 	$commands.hide()
 	$move_selection_icon.visible = true
 	$grid_selection_icon.visible = false
+	play_sound(command_press_sfx)
 
 func _on_mine_pressed():
 	if is_instance_valid(selection):
@@ -155,6 +169,7 @@ func _on_mine_pressed():
 	$commands.hide()
 	$grid_selection_icon.visible = true
 	$selection_icon.visible = false
+	play_sound(command_press_sfx)
 
 func _on_fight_pressed():
 	if is_instance_valid(selection):
@@ -163,6 +178,7 @@ func _on_fight_pressed():
 	$commands.hide()
 	$grid_selection_icon.visible = true
 	$selection_icon.visible = false
+	play_sound(command_press_sfx)
 
 func _on_defend_pressed():
 	selection.receiver = "defend"
@@ -190,6 +206,7 @@ func configure_spawn_ui():
 	$spawning.hide()
 	$pylon_selection_icon.visible = true
 	$grid_selection_icon.visible = false
+	play_sound(command_press_sfx)
 
 func _on_global_timer_beat():
 	get_node("rts_camera/camera/currency").text = String(currency)
@@ -205,3 +222,7 @@ func _on_cursor_range_area_exited(area):
 		return
 	if area in available_pylon:
 		available_pylon.erase(area)
+
+func play_sound(stream: AudioStream):
+	sfx.stream = stream
+	sfx.play()

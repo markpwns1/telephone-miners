@@ -37,6 +37,7 @@ func _on_global_timer_beat():
 
 func _process(delta):
 	if(type >= 1):
+		backing_track.volume_db = -80
 		if play_sound(Sound.Fight, fight_clip, fight_cymb):
 			return
 		if play_sound(Sound.Die, die_clip, die_cymb):
