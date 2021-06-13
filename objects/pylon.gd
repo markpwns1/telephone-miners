@@ -65,8 +65,8 @@ func _on_receive(_receiver: String):
 			get_node(obj).receiver = _receiver
 		if command == "beat":
 			connected = true
-			if not is_moving:
-				pstate == State.Idle
+			if not is_moving and not pstate == State.Idle:
+				pstate = State.Idle
 			move_towards_target()
 			if position.distance_to(target_pos) < 4:
 				$task_icon.texture = null
@@ -76,7 +76,7 @@ func _on_receive(_receiver: String):
 				for transmittee in transmitting:
 					var unit = get_node(transmittee)
 					if position.distance_to(unit.target_pos) > 120:
-						var move_to = position + (position.direction_to(unit.position) * 10).floor() * 12
+						var move_to = position + (position.direction_to(unit.target_pos) * 10).floor() * 12
 						unit.target_pos = move_to
 						unit.is_moving = true
 						if unit.get("mstate") != null:
