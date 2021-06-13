@@ -252,6 +252,7 @@ func _on_global_timer_beat():
 	get_node("rts_camera/camera/ui_container/h_panels/currency").text = "CRYSTALS:  " + String(currency)
 	if OS.get_ticks_msec() - spawn_time < unit_spawn_sound_time_window:
 		emit_signal("spawn_unit")
+	get_node("rts_camera/camera").shake(2, 0.1)
 
 func _on_cursor_range_area_entered(area):
 	if area.get("transmitting") != null:
