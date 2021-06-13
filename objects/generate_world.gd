@@ -19,7 +19,7 @@ onready var ore = preload("res://objects/ore.tscn")
 onready var controller = get_node("../../../controller")
 onready var miner = get_node("../../../miner")
 onready var pylon = get_node("../../../pylon")
-onready var cam = get_tree().root.get_child(0).get_node("rts_camera/camera")
+onready var cam = get_viewport().get_camera() # get_tree().root.get_child(0).get_node("rts_camera/camera")
 
 const ISLAND_HEIGHT = 3
 
@@ -77,6 +77,8 @@ func _ready():
 	pos *= 12
 	pos += Vector2(6, 6)
 	# pos.y = 128*12-pos.y
+	cam = get_current_camera2D()
+	print(cam)
 	cam.smoothing_enabled = false
 	controller.position = pos
 	pylon.position = Vector2(controller.position.x, controller.position.y - 24)
@@ -89,3 +91,14 @@ func _ready():
 
 	if(surface_material):
 		tile_set.tile_set_material(1, surface_material)
+
+func get_current_camera2D():
+	var viewport = get_viewport()
+	if not viewport:
+		return null
+	var camerasGroupName = "__cameras_%d" % viewport.get_viewport_rid().get_id()
+	var cameras = get_tree().get_nodes_in_group(camerasGroupName)
+	for camera in cameras:
+		if camera is Camera2D and camera.current:
+			return camera
+	return null
