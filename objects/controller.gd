@@ -30,7 +30,21 @@ func _draw():
 		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
 		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
 		# show radius
-		draw_circle(Vector2.ZERO, 120, Color(0.1, .3, .5, .15))
+		draw_circle(Vector2.ZERO, 120, Color(0.1, .3, .5, .1))
+	
+	
+	# show radius
+	var radius = 120
+	var points = []
+	var rad = 0
+	while rad < 2 * PI:
+		points.append(Vector2(radius * cos(rad), radius * sin(rad)))
+		rad += PI / 16.0
+	
+	var point = points[-1]
+	for x in points:
+		draw_line(point, x, Color(0.1, .3, .3, .2), 4)
+		point = x
 
 
 func _on_receive(_receiver: String):
