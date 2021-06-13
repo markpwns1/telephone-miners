@@ -220,7 +220,7 @@ func configure_spawn_ui():
 	play_sound(command_press_sfx)
 
 func _on_global_timer_beat():
-	get_node("rts_camera/camera/currency").text = String(currency)
+	get_node("rts_camera/camera/ui_container/h_panels/currency").text = "CRYSTALS:  " + String(currency)
 	if OS.get_ticks_msec() - spawn_time < unit_spawn_sound_time_window:
 		emit_signal("spawn_unit")
 
