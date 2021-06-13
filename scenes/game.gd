@@ -109,6 +109,13 @@ func _unhandled_input(event):
 				selection.receiver = "move " + String(6 + floor(get_global_mouse_position().x / 12) * 12) + " " + String(6 + floor(get_global_mouse_position().y / 12) * 12)
 			stealth = false
 			$selection_icon.visible = false
+		elif event.button_index == BUTTON_RIGHT:
+			selecting_state = Option.NONE
+			selection = null
+			$pylon_selection_icon.visible = false
+			$grid_selection_icon.visible = true
+			$selection_icon.visible = false
+			$move_selection_icon.visible = false
 
 func _draw():
 	for child in get_children():
