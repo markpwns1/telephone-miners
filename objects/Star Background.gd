@@ -9,5 +9,5 @@ func _ready():
 
 
 func _process(delta):
-	global_transform = to_follow.global_transform
+	position = to_follow.get_camera_screen_center()
 	material.set_shader_param("offset", position)
