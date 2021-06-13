@@ -66,6 +66,8 @@ func _on_global_timer_beat():
 		$task_icon.texture = null
 	else:
 		$task_icon.texture = moving_sprite
+	if not is_moving:
+		pstate = State.Idle
 
 func _on_controller_mouse_entered():
 	mouse_on = true

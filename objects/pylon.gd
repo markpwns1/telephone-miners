@@ -65,11 +65,26 @@ func _on_receive(_receiver: String):
 			get_node(obj).receiver = _receiver
 		if command == "beat":
 			connected = true
+			if not is_moving:
+				pstate == State.Idle
 			move_towards_target()
 			if position.distance_to(target_pos) < 4:
 				$task_icon.texture = null
 			else:
 				$task_icon.texture = moving_sprite
+			if pstate != State.Moving:
+				for transmittee in transmitting:
+					var unit = get_node(transmittee)
+					if position.distance_to(unit.target_pos) > 120:
+						var move_to = position + (position.direction_to(unit.position) * 10).floor() * 12
+						unit.target_pos = move_to
+						unit.is_moving = true
+						if unit.get("mstate") != null:
+							unit.mstate = 1
+						elif unit.get("fstate") != null:
+							unit.fstate = 0
+						elif unit.get("pstate") != null:
+							unit.pstate = 1
 
 func _on_pylon_mouse_entered():
 	mouse_on = true
