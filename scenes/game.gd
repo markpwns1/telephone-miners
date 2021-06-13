@@ -67,11 +67,17 @@ func _unhandled_input(event):
 							$selection_icon.follow_node(child)
 						else:
 							# Select an unit with middle mouse
-							if child.get("fstate") != null:
-								_on_fight_pressed()
-							elif child.get("mstate") != null:
-								_on_mine_pressed()
+							if is_instance_valid(selection):
+								selection.receiver = "do"
+							selection = null
+							$commands.hide()
+							$grid_selection_icon.visible = true
+							$selection_icon.visible = false
 							play_sound(alt_select_sfx)
+							# if child.get("fstate") != null:
+							# 	_on_fight_pressed()
+							# elif child.get("mstate") != null:
+							# 	_on_mine_pressed()
 						$spawning.hide()
 						
 						if Input.is_action_pressed("control_stealth"):

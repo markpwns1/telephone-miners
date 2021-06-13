@@ -65,7 +65,7 @@ func _on_receive(_receiver: String):
 		desired_ore = null
 		
 		mstate = State.Moving
-	elif command == "mine":
+	elif command == "mine" || command == "do":
 
 		var ores = get_tree().get_nodes_in_group("ore")
 		for ore in ores:
