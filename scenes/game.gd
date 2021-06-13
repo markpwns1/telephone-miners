@@ -30,11 +30,20 @@ var sfx: AudioStreamPlayer
 onready var message_label = get_node("rts_camera/camera/message_container/msg")
 
 var msg_timer = 0
+var game_over = false
 
-func show_message(msg, time = 1):
+func show_message(msg: String, time = 1):
+	if(game_over):
+		return
 	msg_timer = time
 	message_label.text = msg
 	message_label.show()
+
+func show_game_over_message(msg: String):
+	game_over = true
+	message_label.text = msg
+	message_label.show()
+
 
 signal spawn_unit
 func _ready():
@@ -48,10 +57,11 @@ func _ready():
 func _process(dt):
 	$cursor_range.position = get_global_mouse_position()
 
-	if msg_timer > 0:
-		msg_timer -= dt
-	elif message_label.visible:
-		message_label.hide()
+	if !game_over:
+		if msg_timer > 0:
+			msg_timer -= dt
+		elif message_label.visible:
+			message_label.hide()
 
 	update()
 

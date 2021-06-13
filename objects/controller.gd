@@ -30,7 +30,21 @@ func _draw():
 		draw_line(point, point - dir.rotated(deg2rad(45)) * 4, Color(0, 0, 0, .5), 1.5)
 		draw_line(point, point - dir.rotated(deg2rad(-45)) * 4, Color(0, 0, 0, .5), 1.5)
 		# show radius
-		draw_circle(Vector2.ZERO, 120, Color(0.1, .3, .5, .15))
+		draw_circle(Vector2.ZERO, 120, Color(0.1, .3, .5, .1))
+	
+	
+	# show radius
+	var radius = 120
+	var points = []
+	var rad = 0
+	while rad < 2 * PI:
+		points.append(Vector2(radius * cos(rad), radius * sin(rad)))
+		rad += PI / 16.0
+	
+	var point = points[-1]
+	for x in points:
+		draw_line(point, x, Color(0.1, .3, .3, .2), 4)
+		point = x
 
 
 func _on_receive(_receiver: String):
@@ -38,29 +52,29 @@ func _on_receive(_receiver: String):
 
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
-	if command == "move":
-		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		is_moving = true
-		pstate = State.Moving
-		var i = 1
-		var j = 1
-		var x = splitted_receiver[1].to_float()
-		var y = splitted_receiver[2].to_float()
-		for obj in transmitting:
-			if "pylon" in get_node(obj).name:
-				get_node(obj).receiver = "move " + String(x + 48 * j) + " " + splitted_receiver[2]
-				if j < 1:
-					i += 1
-				j += 1
-			else:
-				get_node(obj).receiver = "move " + String(x + 12 * (i % 4)) + " " + String(y + 12 * floor(i / 4))
-				i += 1
-	elif command == "smove":
-		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
-		is_moving = true
-		pstate = State.Moving
-	else:
-		for obj in transmitting:
+	# if command == "move":
+	# 	target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+	# 	is_moving = true
+	# 	pstate = State.Moving
+	# 	var i = 1
+	# 	var j = 1
+	# 	var x = splitted_receiver[1].to_float()
+	# 	var y = splitted_receiver[2].to_float()
+	# 	for obj in transmitting:
+	# 		if "pylon" in get_node(obj).name:
+	# 			get_node(obj).receiver = "move " + String(x + 48 * j) + " " + splitted_receiver[2]
+	# 			if j < 1:
+	# 				i += 1
+	# 			j += 1
+	# 		else:
+	# 			get_node(obj).receiver = "move " + String(x + 12 * (i % 4)) + " " + String(y + 12 * floor(i / 4))
+	# 			i += 1
+	# elif command == "smove":
+	# 	target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
+	# 	is_moving = true
+	# 	pstate = State.Moving
+	# else:
+	for obj in transmitting:
 			get_node(obj).receiver = _receiver
 
 func check():
@@ -109,3 +123,6 @@ func cull_null_transmitees():
 			to_remove.append(x)
 	for x in to_remove:
 		transmitting.erase(x)
+
+func _exit_tree():
+	get_parent().show_game_over_message("Game Over")
