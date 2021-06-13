@@ -6,6 +6,8 @@ var nav: Navigation2D
 
 var target_pos: Vector2
 var is_moving = false
+var out_of_range = false
+var out_of_range_timer = 0
 var path: PoolVector2Array
 
 func resolve_path():
@@ -13,6 +15,11 @@ func resolve_path():
 		path = nav.get_simple_path(position, target_pos)
 
 func move_towards_target():
+	if out_of_range:
+		out_of_range_timer += 1
+		if out_of_range_timer > 2:
+			out_of_range_timer = 0
+			out_of_range = false
 	update()
 	if not is_moving:
 		return

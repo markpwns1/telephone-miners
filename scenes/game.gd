@@ -152,8 +152,13 @@ func _draw():
 		if child.get("transmitting") != null:
 			child.cull_null_transmitees()
 			for transmittee in child.transmitting:
+				var col = Color(0, 0, 0, 0.5)
+				var weight = 1
+				if child.get_node(transmittee).out_of_range:
+					col = Color(.6, .2, .2, 0.8)
+					weight = 1.5
 				var dir = (child.get_node(transmittee).position - child.position).normalized()
-				draw_line(child.position + dir * 6, child.get_node(transmittee).position - dir * 6, Color(0, 0, 0, 0.5), 1)
+				draw_line(child.position + dir * 6, child.get_node(transmittee).position - dir * 6, col, weight)
 
 func _on_move_pressed():
 	if is_instance_valid(selection):

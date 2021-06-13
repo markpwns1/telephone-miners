@@ -7,6 +7,7 @@ export var moving_sprite: Texture
 
 var connected = true
 var receiver: String = ""
+var prev_command: String = ""
 var pstate = State.Idle
 var mouse_on: bool = false
 
@@ -42,7 +43,7 @@ func _on_receive(_receiver: String):
 
 	var splitted_receiver = _receiver.split(" ")
 	var command = splitted_receiver[0]
-
+	# personally act on current order
 	if command == "move":
 		target_pos = Vector2(splitted_receiver[1].to_float(), splitted_receiver[2].to_float())
 		is_moving = true
@@ -77,6 +78,7 @@ func _on_receive(_receiver: String):
 					var unit = get_node(transmittee)
 					if position.distance_to(unit.target_pos) > 120:
 						var move_to = position + (position.direction_to(unit.target_pos) * 10).floor() * 12
+						unit.out_of_range = position.distance_to(unit.target_pos) > 130
 						unit.target_pos = move_to
 						unit.is_moving = true
 						if unit.get("mstate") != null:
@@ -85,6 +87,25 @@ func _on_receive(_receiver: String):
 							unit.fstate = 0
 						elif unit.get("pstate") != null:
 							unit.pstate = 1
+	# send out previous order
+	var split_rec = prev_command.split(" ")
+	if split_rec[0] == "move":
+		var pos = Vector2(split_rec[1].to_float(), split_rec[2].to_float())
+		var i = 1
+		var j = 1
+		for obj in transmitting:
+			if "pylon" in get_node(obj).name:
+				get_node(obj).receiver = "move " + String(pos.x + 48 * j) + " " + split_rec[2]
+				j += 1
+			else:
+				get_node(obj).receiver = "move " + String(pos.x + 12 * (i % 4)) + " " + String(pos.y + 12 * floor(i / 4))
+	elif split_rec[0] == "smove":
+		pass
+	else:
+		for obj in transmitting:
+			get_node(obj).receiver = prev_command
+			
+	prev_command = receiver
 
 func _on_pylon_mouse_entered():
 	mouse_on = true
