@@ -27,6 +27,18 @@ export var alt_select_sfx: AudioStream
 export var choose_pos_sfx: AudioStream
 var sfx: AudioStreamPlayer
 
+onready var message_container = get_node("rts_camera/camera/message_container")
+onready var no_currency_msg = message_container.get_node("no_money_msg")
+
+var msg_timer = 0
+var current_msg: Control
+
+func show_message(msg):
+	msg_timer = 1
+	no_currency_msg.hide()
+	current_msg = msg
+	msg.show()
+
 signal spawn_unit
 func _ready():
 	self.connect("spawn_unit", get_node("sfx_controller"), "_on_unit_spawn")
@@ -36,8 +48,15 @@ func _ready():
 	$selection_icon.visible = false
 	sfx = $menu_sfx
 
-func _process(delta):
+func _process(dt):
 	$cursor_range.position = get_global_mouse_position()
+
+	if msg_timer > 0:
+		msg_timer -= dt
+	elif current_msg:
+		current_msg.hide()
+		current_msg = null
+		
 	update()
 
 func _unhandled_input(event):
@@ -123,6 +142,8 @@ func _unhandled_input(event):
 					# No spawning
 					$spawning.hide()
 					$selection_icon.hide()
+					if currency <= 0:
+						show_message(no_currency_msg)
 				selecting_state = Option.NONE
 		elif event.button_index == BUTTON_LEFT:
 			# Left click while choosing a place to move to
