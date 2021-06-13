@@ -41,7 +41,9 @@ func get_position_with_difficulty_dist(s = 1.0):
 	return Vector2(x, y)
 
 func _ready():
-	noise.seed = randi()
+	var s = OS.get_unix_time()
+	noise.seed = s
+	print("SEED: " + String(s))
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8
