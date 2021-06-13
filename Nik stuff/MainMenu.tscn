@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nik stuff/chircago.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Nik stuff/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shaders/stars.shader" type="Shader" id=4]
+[ext_resource path="res://audio/menu clicks/SFXMenuClickC.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -163,6 +164,10 @@ rect_min_size = Vector2( 45, 0 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Exit"
+
+[node name="sfx_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Start/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer/Exit/exit_button" to="." method="_on_exit_button_mouse_entered"]

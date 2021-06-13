@@ -20,9 +20,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_down")and current_selection < 1:
 		current_selection += 1
 		set_current_selection(current_selection)
+		$sfx_click.play()
 	elif Input.is_action_just_pressed("ui_up") and current_selection > 0:
 		current_selection -= 1
 		set_current_selection(current_selection)
+		$sfx_click.play()
 	
 	$ColorRect.material.set_shader_param("offset", get_global_mouse_position())
 
@@ -50,10 +52,16 @@ func _on_start_button_pressed():
 	handle_selection(0)
 
 func _on_start_button_mouse_entered():
+	if current_selection == 1:
+		$sfx_click.play()
+	current_selection = 0
 	set_current_selection(0)
 
 func _on_exit_button_pressed():
 	handle_selection(1)
 
 func _on_exit_button_mouse_entered():
+	if current_selection == 0:
+		$sfx_click.play()
+	current_selection = 1
 	set_current_selection(1)
